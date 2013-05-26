@@ -1,0 +1,47 @@
+chess game classes
+
+
+board
+
+chesspiece, each player has 2 rooks, 2 knights, 2 bishops, 1 queen, 1 king, 8 pawns
+rooks can move only in a straigt line, knights can move down 3 and over 1 or down 1 and over 3, queens can move diag or straight
+king can move 1 square
+
+chesspiece functions & attributes
+  position - x & y
+  character for representation (K,q,k,b,r,p)
+  move 
+  available move ---anticipated result of available moves needed for ai player i.e. available moves after available move
+  value - king highest, queen high, rook med, knight med, bishop med, pawn low
+
+compPlayer- controls chesspiece objects on one side 
+
+
+game-- loop until game is over, alternating turns
+  draw board after each players turn
+
+
+ 
+
+
+
+misc ideas
+
+piece isVulnerable()
+check each peice of comp players 
+to see if a player's piece can remove that piece
+
+if no pieces vulnerable, move pieces into position to take enemy pieces, if pawn blocks other pieces move to create hole
+
+
+
+problem- position can be vulnerable to multiple pieces at one time
+
+if all vulnerable pieces can be protected, do that- i.e if any piece can remove enemy piece that creates vulnerability 
+& block another piece from high value piece, use that piece
+
+
+for each comp piece
+  if(position vulnerable)
+    if(!list.contains aggressive piece)
+      add aggressive piece to list
