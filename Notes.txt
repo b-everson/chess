@@ -51,4 +51,10 @@ for each comp piece
 -------design issue 
 I want the pieces to be able to "see" the available moves, which means 
 there needs to be a reference to the board positions & whether or not they
-are blocked. The piece to be moved needs to know if a move is available, so
+are blocked. 
+
+
+----another issue, characters are all white, no way to differentiate player's pieces
+temp solution - signify with (p1) or (p2)
+
+

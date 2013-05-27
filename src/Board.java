@@ -1,11 +1,17 @@
+import java.util.ArrayList;
 public class Board{
 
   BoardPosition[][] gameBoard = new BoardPosition[8][8];
   public static final int BOARD_HEIGHT = 7;
   public static final int BOARD_WIDTH = 7;
+  private Player player1 = null;
+  private Player player2 = null;
 
-  public Board(){
-    loadPositions();
+  public Board(Player firstPlayer, Player secondPlayer){
+    player1 = firstPlayer;
+	player2 = secondPlayer;
+	loadPositions();
+	initializeBoard();
   }
   
   //using array of characters
@@ -13,8 +19,8 @@ public class Board{
     clearBoard();
 	addPiecesTest();
 	//loop through x from top down, print y values 
-	for(int xPos = gameBoard.length - 1;xPos >= 0;xPos--){
-	  for(int yPos = 0; yPos < gameBoard[xPos].length;yPos++){
+	for(int yPos = gameBoard.length - 1;yPos >= 0;yPos--){
+	  for(int xPos = 0; xPos < gameBoard[yPos].length;xPos++){
 	    System.out.print(gameBoard[xPos][yPos]);
 	  }
 	  System.out.println("");
@@ -29,23 +35,54 @@ public class Board{
 	}
   }
   
+  private void addPiecesTest(Player player){
+    ArrayList<ChessPiece> playerPieces = player.getPieces();
+	for (ChessPiece piece: playerPieces){
+	  int xLocation = piece.getX();
+	  int yLocation = piece.getY();
+	  gameBoard[xLocation][yLocation].setPosition(piece);
+	}
+  }
+  
   private void addPiecesTest(){
-    /*gameBoard[7][0] = 'r';
-	gameBoard[7][1] = 'k';
-	gameBoard[7][2] = 'b';
-	gameBoard[7][3] = 'K';
-	gameBoard[7][4] = 'Q';
-	gameBoard[7][5] = 'b';
-	gameBoard[7][6] = 'k';
-	gameBoard[7][7] = 'r';
-	gameBoard[0][0] = 'r';
-	gameBoard[0][1] = 'k';
-	gameBoard[0][2] = 'b';
-	gameBoard[0][3] = 'K';
-	gameBoard[0][4] = 'Q';
-	gameBoard[0][5] = 'b';
-	gameBoard[0][6] = 'k';
-	gameBoard[0][7] = 'r';*/
+	addPiecesTest(player1);
+	addPiecesTest(player2);
+  }
+  
+  public void initializeBoard(){
+    player1.initializePiece(0,0,7);
+	player1.initializePiece(1,7,7);
+	player1.initializePiece(2,1,7);
+	player1.initializePiece(3,6,7);
+	player1.initializePiece(4,2,7);
+	player1.initializePiece(5,5,7);
+	player1.initializePiece(6,4,7);
+	player1.initializePiece(7,3,7);
+	player1.initializePiece(8,0,6);
+	player1.initializePiece(9,1,6);
+	player1.initializePiece(10,2,6);
+	player1.initializePiece(11,3,6);
+	player1.initializePiece(12,4,6);
+	player1.initializePiece(13,5,6);
+	player1.initializePiece(14,6,6);
+	player1.initializePiece(15,7,6);
+	
+	player2.initializePiece(0,0,0);
+	player2.initializePiece(1,7,0);
+	player2.initializePiece(2,1,0);
+	player2.initializePiece(3,6,0);
+	player2.initializePiece(4,2,0);
+	player2.initializePiece(5,5,0);
+	player2.initializePiece(6,3,0);
+	player2.initializePiece(7,4,0);
+	player2.initializePiece(8,0,1);
+	player2.initializePiece(9,1,1);
+	player2.initializePiece(10,2,1);
+	player2.initializePiece(11,3,1);
+	player2.initializePiece(12,4,1);
+	player2.initializePiece(13,5,1);
+	player2.initializePiece(14,6,1);
+	player2.initializePiece(15,7,1);
   }
   
   private void loadPositions(){

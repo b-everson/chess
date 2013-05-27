@@ -2,7 +2,7 @@ public class BoardPosition{
   private int xCoord;
   private int yCoord;
   private ChessPiece currentPiece = null;
-  private char contents = ' ';
+  private String contents = "       ";
   
   public BoardPosition(int x, int y){
     xCoord = x;
@@ -25,13 +25,18 @@ public class BoardPosition{
     return(incoming.getOwner() != currentPiece.getOwner());
   }
   
+  public void setPosition(ChessPiece piece){
+    currentPiece = piece;
+	contents = currentPiece.toString();
+  }
+  
   public void clearPosition(){
     currentPiece = null;
-	contents = ' ';
+	contents = "       ";
   }
   
   public String toString(){
-    return Character.toString(contents);
+    return contents;
   }
   
 }

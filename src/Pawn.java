@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Pawn extends ChessPiece{
   private static final char PAWN_CHAR = 'p';
   
@@ -6,7 +7,7 @@ public class Pawn extends ChessPiece{
   }
   
   public ArrayList<BoardPosition> checkMoveAvailable(){
-    ArrayList<BoardPosition> possibilities = new ArrayList<BoardPosition>;
+    ArrayList<BoardPosition> possibilities = new ArrayList<BoardPosition>();
 	possibilities.add(new BoardPosition(1,1));
 	return possibilities;
   }

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Rook extends ChessPiece{
   private static final char ROOK_CHAR = 'r';
   
@@ -22,7 +23,7 @@ public class Rook extends ChessPiece{
 	int newYPos = yPos;
 	
 	//yPos >= 0, yPos < Board.BOARD_HEIGHT
-	ArrayList<BoardPosition> possibilities = new ArrayList<BoardPosition>;
+	ArrayList<BoardPosition> possibilities = new ArrayList<BoardPosition>();
 	possibilities.add(new BoardPosition(1,1));
 	return possibilities;
   }
