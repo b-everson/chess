@@ -2,8 +2,8 @@ import java.util.ArrayList;
 public class Queen extends ChessPiece{
   private static final char QUEEN_CHAR = 'Q';
   
-  public Queen(Player pOwner){
-    super(QUEEN_CHAR, pOwner);
+  public Queen(Player pOwner, Board bOwner){
+    super(QUEEN_CHAR, pOwner, bOwner);
   }
   
   public ArrayList<BoardPosition> checkMoveAvailable(){
@@ -12,7 +12,7 @@ public class Queen extends ChessPiece{
 	return possibilities;
   }
   
-  public void move(){
+  public void move(BoardPosition position){
   
   }
 }

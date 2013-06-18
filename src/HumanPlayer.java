@@ -3,6 +3,10 @@ public class HumanPlayer extends Player{
   private static Scanner input = new Scanner(System.in);
   //protected ArrayList<ChessPiece> pieces
   
+  public HumanPlayer(Board board){
+    super(board);
+  }
+  
   public void takeTurn(){
     ChessPiece chosenPiece = null;
 	do{
@@ -13,6 +17,7 @@ public class HumanPlayer extends Player{
 	} while(chosenPiece == null);
     int xPos = selectPosition('x');	
 	int yPos = selectPosition('y');
+	movePiece(chosenPiece,xPos,yPos);
   }
   
   private int selectPosition(char axis){
@@ -41,7 +46,7 @@ public class HumanPlayer extends Player{
 	int y = -1;
     do{	
 	  System.out.println("What is the x coordinate of the piece you would like to move?");
-	  x = input.nextInt();
+	  x = input.nextInt() - 1;
 	  if(x < 0 || x > Board.BOARD_WIDTH){
 	    System.out.println("Invalid x coordinate, please enter a valid one.");
 	  }
@@ -49,17 +54,23 @@ public class HumanPlayer extends Player{
 	
 	do{
 	  System.out.println("What is the y coordinate of the piece you would like to move?");
-	  y = input.nextInt();
+	  y = input.nextInt() - 1;
       if(y < 0 || y > Board.BOARD_HEIGHT){
         System.out.println("Invalid y coordinate, please enter a valid one.");
       }	 	  
 	} while (y < 0 || y > Board.BOARD_HEIGHT);  //get y
 	
 	for (ChessPiece piece: pieces){
-	  if(piece.getX() == x && piece.getY() == y){
+	  if(piece.getPosition().getX() == x && piece.getPosition().getY() == y){
 	    selectedPiece = piece;
 	  }
 	}
 	return selectedPiece;
   }//selectPiece()
+  
+  public void movePiece(ChessPiece piece, int x, int y){   
+	BoardPosition movePosition = getBoard().getBoardPosition(x,y);
+	piece.move(movePosition);
+	System.out.println(movePosition.getX() + " " + movePosition.getY());
+  }
 }

@@ -3,6 +3,7 @@ public abstract class Player{
   private static boolean player1 = true;
   protected ArrayList<ChessPiece> pieces = new ArrayList<ChessPiece>(16);
   public abstract void takeTurn();
+  private Board board;
   private Rook r1;
   private Rook r2;
   private Bishop b1;
@@ -21,6 +22,10 @@ public abstract class Player{
   private Pawn p8;
   private String playerDescription;
   
+  public Board getBoard(){
+    return this.board;
+  }
+  
   public String getDescription(){
     return playerDescription;
   }
@@ -29,28 +34,29 @@ public abstract class Player{
     return pieces;
   }
   
-  public Player(){
-    	if(player1){
+  public Player(Board owner){
+    this.board = owner;
+	if(player1){
 	  playerDescription = "(p1)";
 	}else{
 	  playerDescription = "(p2)";
 	}
-	r1 = new Rook(this);
-	r2 = new Rook(this);
-	b1 = new Bishop(this);
-	b2 = new Bishop(this);
-	k1 = new Knight(this);
-	k2 = new Knight(this);
-	q = new Queen(this);
-	k = new King(this);
-	p1 = new Pawn(this);
-	p2 = new Pawn(this);
-	p3 = new Pawn(this);
-	p4 = new Pawn(this);
-	p5 = new Pawn(this);
-	p6 = new Pawn(this);
-	p7 = new Pawn(this);
-	p8 = new Pawn(this);
+	r1 = new Rook(this, board);
+	r2 = new Rook(this, board);
+	b1 = new Bishop(this, board);
+	b2 = new Bishop(this, board);
+	k1 = new Knight(this, board);
+	k2 = new Knight(this, board);
+	q = new Queen(this, board);
+	k = new King(this, board);
+	p1 = new Pawn(this, board);
+	p2 = new Pawn(this, board);
+	p3 = new Pawn(this, board);
+	p4 = new Pawn(this, board);
+	p5 = new Pawn(this, board);
+	p6 = new Pawn(this, board);
+	p7 = new Pawn(this, board);
+	p8 = new Pawn(this, board);
 	
 	pieces.add(0,r1);
 	pieces.add(1,r2);
@@ -72,9 +78,22 @@ public abstract class Player{
 	player1 = false;
   }
   
-  public void initializePiece(int piece,int x, int y){
+  protected ChessPiece getPiece(int xPos, int yPos){
+    ChessPiece returnPiece = null;
+	for(ChessPiece piece : pieces){
+	  if (piece.getPosition().getX() == xPos && piece.getPosition().getY() == yPos){
+	    returnPiece = piece;
+		break;
+	  }
+	}
+	return returnPiece;
+  }
+  
+
+  
+  public void initializePiece(int piece,BoardPosition position){
     ChessPiece initPiece = pieces.get(piece);
-	initPiece.initialize(x,y);
+	initPiece.initialize(position);
   }
   
 }

@@ -2,8 +2,8 @@ import java.util.ArrayList;
 public class Bishop extends ChessPiece{
   private static final char BISHOP_CHAR = 'b';
   
-  public Bishop(Player pOwner){
-    super(BISHOP_CHAR, pOwner);
+  public Bishop(Player pOwner, Board bOwner){
+    super(BISHOP_CHAR, pOwner, bOwner);
   }
   
   public ArrayList<BoardPosition> checkMoveAvailable(){
@@ -12,7 +12,7 @@ public class Bishop extends ChessPiece{
 	return possibilities;
   }
   
-  public void move(){
+  public void move(BoardPosition position){
   
   }
 }

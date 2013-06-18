@@ -2,17 +2,17 @@ import java.util.ArrayList;
 public class Knight extends ChessPiece{
   private static final char KNIGHT_CHAR = 'k';
   
-  public Knight(Player pOwner){
-    super(KNIGHT_CHAR, pOwner);
+  public Knight(Player pOwner, Board bOwner){
+    super(KNIGHT_CHAR, pOwner, bOwner);
   }
   
   public ArrayList<BoardPosition> checkMoveAvailable(){
     ArrayList<BoardPosition> possibilities = new ArrayList<BoardPosition>();
-	possibilities.add(new BoardPosition(1,1));
+	
 	return possibilities;
   }
   
-  public void move(){
+  public void move(BoardPosition position){
   
   }
 }

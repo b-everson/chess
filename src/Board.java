@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 public class Board{
 
-  BoardPosition[][] gameBoard = new BoardPosition[8][8];
+  private BoardPosition[][] gameBoard = new BoardPosition[8][8];
   public static final int BOARD_HEIGHT = 7;
   public static final int BOARD_WIDTH = 7;
   private Player player1 = null;
   private Player player2 = null;
 
-  public Board(Player firstPlayer, Player secondPlayer){
+  public void initialize(Player firstPlayer, Player secondPlayer){
     player1 = firstPlayer;
 	player2 = secondPlayer;
 	loadPositions();
@@ -38,8 +38,8 @@ public class Board{
   private void addPiecesTest(Player player){
     ArrayList<ChessPiece> playerPieces = player.getPieces();
 	for (ChessPiece piece: playerPieces){
-	  int xLocation = piece.getX();
-	  int yLocation = piece.getY();
+	  int xLocation = piece.getPosition().getX();
+	  int yLocation = piece.getPosition().getY();
 	  gameBoard[xLocation][yLocation].setPosition(piece);
 	}
   }
@@ -50,39 +50,43 @@ public class Board{
   }
   
   public void initializeBoard(){
-    player1.initializePiece(0,0,7);
-	player1.initializePiece(1,7,7);
-	player1.initializePiece(2,1,7);
-	player1.initializePiece(3,6,7);
-	player1.initializePiece(4,2,7);
-	player1.initializePiece(5,5,7);
-	player1.initializePiece(6,4,7);
-	player1.initializePiece(7,3,7);
-	player1.initializePiece(8,0,6);
-	player1.initializePiece(9,1,6);
-	player1.initializePiece(10,2,6);
-	player1.initializePiece(11,3,6);
-	player1.initializePiece(12,4,6);
-	player1.initializePiece(13,5,6);
-	player1.initializePiece(14,6,6);
-	player1.initializePiece(15,7,6);
+    player1.initializePiece(0,getBoardPosition(0,7));
+	player1.initializePiece(1,getBoardPosition(7,7));
+	player1.initializePiece(2,getBoardPosition(1,7));
+	player1.initializePiece(3,getBoardPosition(6,7));
+	player1.initializePiece(4,getBoardPosition(2,7));
+	player1.initializePiece(5,getBoardPosition(5,7));
+	player1.initializePiece(6,getBoardPosition(4,7));
+	player1.initializePiece(7,getBoardPosition(3,7));
+	player1.initializePiece(8,getBoardPosition(0,6));
+	player1.initializePiece(9,getBoardPosition(1,6));
+	player1.initializePiece(10,getBoardPosition(2,6));
+	player1.initializePiece(11,getBoardPosition(3,6));
+	player1.initializePiece(12,getBoardPosition(4,6));
+	player1.initializePiece(13,getBoardPosition(5,6));
+	player1.initializePiece(14,getBoardPosition(6,6));
+	player1.initializePiece(15,getBoardPosition(7,6));
 	
-	player2.initializePiece(0,0,0);
-	player2.initializePiece(1,7,0);
-	player2.initializePiece(2,1,0);
-	player2.initializePiece(3,6,0);
-	player2.initializePiece(4,2,0);
-	player2.initializePiece(5,5,0);
-	player2.initializePiece(6,3,0);
-	player2.initializePiece(7,4,0);
-	player2.initializePiece(8,0,1);
-	player2.initializePiece(9,1,1);
-	player2.initializePiece(10,2,1);
-	player2.initializePiece(11,3,1);
-	player2.initializePiece(12,4,1);
-	player2.initializePiece(13,5,1);
-	player2.initializePiece(14,6,1);
-	player2.initializePiece(15,7,1);
+	player2.initializePiece(0,getBoardPosition(0,0));
+	player2.initializePiece(1,getBoardPosition(7,0));
+	player2.initializePiece(2,getBoardPosition(1,0));
+	player2.initializePiece(3,getBoardPosition(6,0));
+	player2.initializePiece(4,getBoardPosition(2,0));
+	player2.initializePiece(5,getBoardPosition(5,0));
+	player2.initializePiece(6,getBoardPosition(3,0));
+	player2.initializePiece(7,getBoardPosition(4,0));
+	player2.initializePiece(8,getBoardPosition(0,1));
+	player2.initializePiece(9,getBoardPosition(1,1));
+	player2.initializePiece(10,getBoardPosition(2,1));
+	player2.initializePiece(11,getBoardPosition(3,1));
+	player2.initializePiece(12,getBoardPosition(4,1));
+	player2.initializePiece(13,getBoardPosition(5,1));
+	player2.initializePiece(14,getBoardPosition(6,1));
+	player2.initializePiece(15,getBoardPosition(7,1));
+  }
+  
+  public BoardPosition getBoardPosition(int x, int y){
+    return gameBoard[x][y];
   }
   
   private void loadPositions(){

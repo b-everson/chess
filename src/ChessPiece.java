@@ -1,27 +1,24 @@
 import java.util.ArrayList;
 public abstract class ChessPiece{
-  protected int xPos;
-  protected int yPos;
   private Player owner;
   protected Board gameBoard;
   private char pieceChar;
   private String playerInfo;
+  protected BoardPosition position = null;
+
   
-  public ChessPiece(char symbol, Player pOwner){
+  public ChessPiece(char symbol, Player pOwner, Board bOwner){
     pieceChar = symbol;
 	owner = pOwner;
 	playerInfo = pOwner.getDescription();
+	gameBoard = bOwner;
   }
   
   public abstract ArrayList<BoardPosition> checkMoveAvailable(); // return array of possible moves 
-  public abstract void move();
+  public abstract void move(BoardPosition position);
   
-  public int getX(){
-    return xPos;
-  }
-  
-  public int getY(){
-    return yPos;
+  public BoardPosition getPosition(){
+    return position;
   }
   
   //get piece Owner to determine if piece is friendly or not
@@ -39,9 +36,8 @@ public abstract class ChessPiece{
   }
   
   //function called only when adding a piece to the board
-  public void initialize(int x, int y){
-    xPos = x;
-	yPos = y;
+  public void initialize(BoardPosition position){
+    this.position = position;
   }
   
 }
