@@ -13,9 +13,29 @@ public class Pawn extends ChessPiece{
   
   public ArrayList<BoardPosition> checkMoveAvailable(){
     ArrayList<BoardPosition> possibilities = new ArrayList<BoardPosition>();
-    possibilities.add(gameBoard.getBoardPosition(position.getX(),position.getY() + 1 * direction));
-	if(firstMove)
-	  possibilities.add(gameBoard.getBoardPosition(position.getX(),position.getY() + 2 * direction));
+    BoardPosition pos1 = gameBoard.getBoardPosition(position.getX(),position.getY() + 1 * direction);
+    if(pos1 != null){	
+	if (!pos1.isOccupied()){
+	    possibilities.add(pos1);
+	  }  
+	}  
+	BoardPosition pos2 = gameBoard.getBoardPosition(position.getX(), position.getY() + 2 * direction);
+	if(pos2 != null){  
+	  if(firstMove){
+	    if(!pos2.isOccupied())
+	      possibilities.add(pos2);
+	  }
+	}
+    BoardPosition pos3 = gameBoard.getBoardPosition(position.getX() + 1, position.getY() + 1 * direction);
+    if(pos3 != null){ 	
+	  if(pos3.occupiedByEnemy(this))
+	    possibilities.add(pos3);
+	}  
+	BoardPosition pos4 = gameBoard.getBoardPosition(position.getX() -1, position.getY() + 1 * direction);
+	if(pos4 != null){
+	  if(pos4.occupiedByEnemy(this))
+	    possibilities.add(pos4);
+    }	
 	return possibilities;
   }
   
@@ -23,10 +43,30 @@ public class Pawn extends ChessPiece{
     this.position = position;
   }
   
-  public void move(BoardPosition position){
-    if(checkMoveAvailable().contains(position))
-	{
-	  this.setPosition(position);
+  public boolean move(BoardPosition position){
+	boolean canMove = true;
+	String message = "";
+	
+	if(position != null){
+	  if (position.occupiedByFriendly(this)) {
+	  canMove = false;
+	  message = "Cannot move into a space occupied by your own piece.";
+	  }
 	}
+	
+	if(!checkMoveAvailable().contains(position) )
+	{
+	  canMove = false;
+	  message = "Not a valid move.";
+	}
+		
+	if(canMove){
+	  this.setPosition(position);
+	  position.setPiece(this);
+	  firstMove = false;
+	}  
+	else
+	  System.out.println(message);
+	return canMove;
   }
 }

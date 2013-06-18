@@ -12,7 +12,7 @@ public class Knight extends ChessPiece{
 	return possibilities;
   }
   
-  public void move(BoardPosition position){
-  
+  public boolean move(BoardPosition position){
+    return false;
   }
 }

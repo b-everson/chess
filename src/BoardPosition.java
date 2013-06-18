@@ -21,16 +21,32 @@ public class BoardPosition{
 	return (currentPiece != null);
   }
   
-  public boolean occupiedByEnemy(ChessPiece incoming){   /*for a move, a piece must know if target is occupied by piece, valid moves cannot including moving one piece to a friendly piece*/
-    return(incoming.getOwner() != currentPiece.getOwner());
+  public boolean occupiedByFriendly(ChessPiece incoming){
+    boolean occupied = false;
+	if(currentPiece != null){
+	  if(incoming.getOwner() == currentPiece.getOwner())
+	    occupied = true;
+	}	
+	return occupied;
   }
   
-  public void setPosition(ChessPiece piece){
-    currentPiece = piece;
+  public boolean occupiedByEnemy(ChessPiece incoming){   /*for a move, a piece must know if target is occupied by piece, valid moves cannot including moving one piece to a friendly piece*/
+    boolean occupied = false;
+	if(currentPiece != null){
+	  if(incoming.getOwner() != currentPiece.getOwner())
+	    occupied = true;
+	}
+	return occupied;
+  }
+  
+  public void setPiece(ChessPiece piece){
+    if(currentPiece != null)
+	  currentPiece.setInactive();
+	currentPiece = piece;
 	contents = currentPiece.toString();
   }
   
-  public void clearPosition(){
+  public void clearPiece(){
     currentPiece = null;
 	contents = "       ";
   }

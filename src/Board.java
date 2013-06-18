@@ -23,14 +23,15 @@ public class Board{
 	  for(int xPos = 0; xPos < gameBoard[yPos].length;xPos++){
 	    System.out.print(gameBoard[xPos][yPos]);
 	  }
-	  System.out.println("");
+	  System.out.println("    " + (yPos + 1));
 	}
+	System.out.println("   1      2      3      4      5      6      7      8  ");
   }
   
   private void clearBoard(){
     for (int i = 0; i < gameBoard.length;i++){
 	  for (int j = 0; j < gameBoard[i].length;j++){
-	    gameBoard[i][j].clearPosition();
+	    gameBoard[i][j].clearPiece();
 	  }
 	}
   }
@@ -38,9 +39,11 @@ public class Board{
   private void addPiecesTest(Player player){
     ArrayList<ChessPiece> playerPieces = player.getPieces();
 	for (ChessPiece piece: playerPieces){
+	  if(piece.getPosition() != null){
 	  int xLocation = piece.getPosition().getX();
 	  int yLocation = piece.getPosition().getY();
-	  gameBoard[xLocation][yLocation].setPosition(piece);
+	  gameBoard[xLocation][yLocation].setPiece(piece);
+	  }
 	}
   }
   
@@ -86,7 +89,10 @@ public class Board{
   }
   
   public BoardPosition getBoardPosition(int x, int y){
-    return gameBoard[x][y];
+    if(x >= 0 && y >= 0 && x <= Board.BOARD_WIDTH && y <= Board.BOARD_HEIGHT)
+	  return gameBoard[x][y];
+	else
+	  return null;
   }
   
   private void loadPositions(){

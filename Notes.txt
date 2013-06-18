@@ -58,3 +58,21 @@ are blocked.
 temp solution - signify with (p1) or (p2)
 
 
+--movement different for each side, need computer player to move pieces downward
+
+
+
+
+
+
+
+
+
+game owns a board and two players
+player owns pieces
+
+to check available moves for a piece, it must be aware of the board - pass board to player to piece?
+
+
+piece has boardposition, boardposition has piece? 
+

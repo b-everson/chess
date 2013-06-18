@@ -6,8 +6,8 @@ public class Rook extends ChessPiece{
     super(ROOK_CHAR,pOwner, bOwner);
   }
   
-  public void move(BoardPosition position){
-    
+  public boolean move(BoardPosition position){
+    return false;
   }
   
   public ArrayList<BoardPosition> checkMoveAvailable(){  

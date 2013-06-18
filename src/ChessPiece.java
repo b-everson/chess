@@ -15,7 +15,7 @@ public abstract class ChessPiece{
   }
   
   public abstract ArrayList<BoardPosition> checkMoveAvailable(); // return array of possible moves 
-  public abstract void move(BoardPosition position);
+  public abstract boolean move(BoardPosition position);
   
   public BoardPosition getPosition(){
     return position;
@@ -38,6 +38,10 @@ public abstract class ChessPiece{
   //function called only when adding a piece to the board
   public void initialize(BoardPosition position){
     this.position = position;
+  }
+  
+  public void setInactive(){
+    this.position = null;
   }
   
 }
