@@ -76,9 +76,7 @@ public class HumanPlayer extends Player{
   public boolean movePiece(ChessPiece piece, int x, int y){   
 	boolean moved = true;
 	BoardPosition movePosition = getBoard().getBoardPosition(x,y);
-	if (piece.move(movePosition))
-	  System.out.println(movePosition.getX() + " " + movePosition.getY());
-	else
+	if (!piece.move(movePosition))
 	  moved = false;
 	return moved;
   }
