@@ -60,10 +60,10 @@ public abstract class Player{
 	
 	pieces.add(0,r1);
 	pieces.add(1,r2);
-	pieces.add(2,b1);
-	pieces.add(3,b2);
-	pieces.add(4,k1);
-	pieces.add(5,k2);
+	pieces.add(2,k1);
+	pieces.add(3,k2);
+	pieces.add(4,b1);
+	pieces.add(5,b2);
 	pieces.add(6,q);
 	pieces.add(7,k);
 	pieces.add(8,p1);
