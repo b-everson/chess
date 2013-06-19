@@ -7,30 +7,87 @@ public class Rook extends ChessPiece{
   }
   
   public boolean move(BoardPosition position){
-    return false;
+    boolean canMove = true;
+	String message = "";
+	
+	if(position != null){                        //move invalid if position already has player's piece in it
+	  if (position.occupiedByFriendly(this)) {
+	  canMove = false;
+	  message = "Cannot move into a space occupied by your own piece.";
+	  }
+	}
+	
+	if(!checkMoveAvailable().contains(position) )  //move invalid if not in list of available moves 
+	{
+	  canMove = false;
+	  message = "Not a valid move.";
+	}
+		
+	if(canMove){
+	  this.setPosition(position); //set BoardPosition reference to position 
+	  position.setPiece(this);   //set position's piece reference to this object
+	  }  
+	else
+	  System.out.println(message);
+	return canMove;
   }
   
   public ArrayList<BoardPosition> checkMoveAvailable(){  
-    
-	//rook can move in straight line on either x or y axis
-	//xPos >= 0, xPos <= Board.BOARD_WIDTH
-	for(int i = 0; i <= Board.BOARD_WIDTH;i++){
-	 /* if(!(position.blocked)){
-	    boardRep[0][] = 
-	  }*/
-	}
-	
-	
-	//yPos >= 0, yPos < Board.BOARD_HEIGHT
 	ArrayList<BoardPosition> possibilities = new ArrayList<BoardPosition>();
-	possibilities.add(new BoardPosition(1,1));
+	//Add each available position extending x --            check position add empty, add enemy then break,   break on friendly
+	for(int x = position.getX() - 1; x >= 0; x--){
+	  BoardPosition checkPosition = gameBoard.getBoardPosition(x, position.getY());
+	  if (!checkPosition.isOccupied()){
+	     possibilities.add(checkPosition);
+	  }else if (checkPosition.occupiedByEnemy(this)){
+	    possibilities.add(checkPosition);
+		break;  //break after adding first enemy piece
+	  }else{
+	    break;  //break on friendly piece 
+	  }
+	}  
+	
+	//Add each available position extending x ++            check position add empty, add enemy then break,   break on friendly
+	for(int x = position.getX() + 1; x <= Board.BOARD_WIDTH; x++){
+	  BoardPosition checkPosition = gameBoard.getBoardPosition(x, position.getY());
+	  if (!checkPosition.isOccupied()){
+	     possibilities.add(checkPosition);
+	  }else if (checkPosition.occupiedByEnemy(this)){
+	    possibilities.add(checkPosition);
+		break;  //break after adding first enemy piece
+	  }else{
+	    break;  //break on friendly piece 
+	  }
+	}  
+	
+		//Add each available position extending y --            check position add empty, add enemy then break,   break on friendly
+	for(int y = position.getY() - 1; y >= 0; y--){
+	  BoardPosition checkPosition = gameBoard.getBoardPosition(position.getX(), y);
+	  if (!checkPosition.isOccupied()){
+	     possibilities.add(checkPosition);
+	  }else if (checkPosition.occupiedByEnemy(this)){
+	    possibilities.add(checkPosition);
+		break;  //break after adding first enemy piece
+	  }else{
+	    break;  //break on friendly piece 
+	  }
+	}  
+	
+	//Add each available position extending y ++            check position add empty, add enemy then break,   break on friendly
+	for(int y = position.getY() + 1; y <= Board.BOARD_HEIGHT; y++){
+	  BoardPosition checkPosition = gameBoard.getBoardPosition(position.getX(), y);
+	  if (!checkPosition.isOccupied()){
+	     possibilities.add(checkPosition);
+	  }else if (checkPosition.occupiedByEnemy(this)){
+	    possibilities.add(checkPosition);
+		break;  //break after adding first enemy piece
+	  }else{
+	    break;  //break on friendly piece 
+	  }
+	}  
+	
+
 	return possibilities;
   }
   
-  /*  generateMovePath()
-    check each position on check move available  
-	if there is a piece in any position except target then it is blocked,
-	if target position is occupied by friendly piece it is blocked
-  
-  */
 }
