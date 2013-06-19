@@ -38,9 +38,6 @@ public class Pawn extends ChessPiece{
 	return possibilities;
   }
   
-  public void setPosition(BoardPosition position){
-    this.position = position;
-  }
   
   public boolean move(BoardPosition position){
 	boolean canMove = true;

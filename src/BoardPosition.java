@@ -3,7 +3,7 @@ public class BoardPosition{
   private int yCoord;
   private ChessPiece currentPiece = null;
   private String contents = "       ";
-  
+
   public BoardPosition(int x, int y){
     xCoord = x;
 	yCoord = y;
@@ -54,6 +54,7 @@ public class BoardPosition{
   public ChessPiece getPiece(){
     return currentPiece;
   }
+  
   
   public String toString(){
     return contents;

@@ -8,11 +8,32 @@ public class Queen extends ChessPiece{
   
   public ArrayList<BoardPosition> checkMoveAvailable(){
     ArrayList<BoardPosition> possibilities = new ArrayList<BoardPosition>();
-	possibilities.add(new BoardPosition(1,1));
 	return possibilities;
   }
   
   public boolean move(BoardPosition position){
-    return false;
+    boolean canMove = true;
+	String message = "";
+	
+	if(position != null){                        //move invalid if position already has player's piece in it
+	  if (position.occupiedByFriendly(this)) {
+	  canMove = false;
+	  message = "Cannot move into a space occupied by your own piece.";
+	  }
+	}
+	
+	if(!checkMoveAvailable().contains(position) )  //move invalid if not in list of available moves 
+	{
+	  canMove = false;
+	  message = "Not a valid move.";
+	}
+		
+	if(canMove){
+	  this.setPosition(position); //set BoardPosition reference to position 
+	  position.setPiece(this);   //set position's piece reference to this object
+	  }  
+	else
+	  System.out.println(message);
+	return canMove;
   }
 }
