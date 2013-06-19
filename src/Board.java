@@ -103,6 +103,15 @@ public class Board{
 	}
   }
   
+  public Player getOtherPlayer(Player thisPlayer){
+    if(thisPlayer.equals(player2))
+	  return player1;
+	else
+      return player2;	
+  }
+  
+
+  
   /* loop through each player's pieces
   get the position of piece and representative character- set
   private void addPieces(){
