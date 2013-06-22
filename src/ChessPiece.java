@@ -15,7 +15,32 @@ public abstract class ChessPiece{
   }
   
   public abstract ArrayList<BoardPosition> checkMoveAvailable(); // return array of possible moves 
-  public abstract boolean move(BoardPosition position);
+  
+  public boolean move(BoardPosition position){
+	boolean canMove = true;
+	String message = "";
+	
+	if(position != null){                        //move invalid if position already has player's piece in it
+	  if (position.occupiedByFriendly(this)) {
+	  canMove = false;
+	  message = "Cannot move into a space occupied by your own piece.";
+	  }
+	}
+	
+	if(!checkMoveAvailable().contains(position) )  //move invalid if not in list of available moves 
+	{
+	  canMove = false;
+	  message = "Not a valid move.";
+	}
+		
+	if(canMove){
+	  this.setPosition(position); //set BoardPosition reference to position 
+	  position.setPiece(this);   //set position's piece reference to this object
+	}  
+	else
+	  System.out.println(message);
+	return canMove;
+  }
   
   public BoardPosition getPosition(){
     return position;
