@@ -38,8 +38,15 @@ public class Pawn extends ChessPiece{
 	return possibilities;
   }
   
-  
   public boolean move(BoardPosition position){
+    boolean moveTrue = super.move(position);
+	if(moveTrue){
+	  firstMove = false;
+	}
+	return moveTrue;
+  }
+  
+ /* public boolean move(BoardPosition position){
 	boolean canMove = true;
 	String message = "";
 	
@@ -64,5 +71,5 @@ public class Pawn extends ChessPiece{
 	else
 	  System.out.println(message);
 	return canMove;
-  }
+  } */
 }
