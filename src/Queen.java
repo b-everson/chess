@@ -156,7 +156,7 @@ public class Queen extends ChessPiece{
 	return possibilities;
   }
   
-  public boolean move(BoardPosition position){
+  /*public boolean move(BoardPosition position){
     boolean canMove = true;
 	String message = "";
 	
@@ -180,5 +180,5 @@ public class Queen extends ChessPiece{
 	else
 	  System.out.println(message);
 	return canMove;
-  }
+  }*/
 }

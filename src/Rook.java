@@ -6,7 +6,7 @@ public class Rook extends ChessPiece{
     super(ROOK_CHAR,pOwner, bOwner);
   }
   
-  public boolean move(BoardPosition position){
+ /* public boolean move(BoardPosition position){
     boolean canMove = true;
 	String message = "";
 	
@@ -30,7 +30,7 @@ public class Rook extends ChessPiece{
 	else
 	  System.out.println(message);
 	return canMove;
-  }
+  }*/
   
   public ArrayList<BoardPosition> checkMoveAvailable(){  
 	ArrayList<BoardPosition> possibilities = new ArrayList<BoardPosition>();
