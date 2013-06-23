@@ -5,13 +5,22 @@ public abstract class ChessPiece{
   private char pieceChar;
   private String playerInfo;
   protected BoardPosition position = null;
-
+  protected ArrayList<BoardPosition> availableMoves;
   
   public ChessPiece(char symbol, Player pOwner, Board bOwner){
     pieceChar = symbol;
 	owner = pOwner;
 	playerInfo = pOwner.getDescription();
 	gameBoard = bOwner;
+	availableMoves = new ArrayList<BoardPosition>();
+  }
+  
+  public ArrayList<BoardPosition> getAvailableMoves(){
+    return availableMoves;
+  }
+  
+  protected void setAvailableMoves(){
+    availableMoves = checkMoveAvailable();
   }
   
   public abstract ArrayList<BoardPosition> checkMoveAvailable(); // return array of possible moves 
@@ -36,6 +45,7 @@ public abstract class ChessPiece{
 	if(canMove){
 	  this.setPosition(position); //set BoardPosition reference to position 
 	  position.setPiece(this);   //set position's piece reference to this object
+	  setAvailableMoves();
 	}  
 	else
 	  System.out.println(message);
@@ -67,6 +77,7 @@ public abstract class ChessPiece{
   
   public void setInactive(){
     this.position = null;
+	availableMoves.clear();
   }
   
   public void setPosition(BoardPosition position){
@@ -76,9 +87,9 @@ public abstract class ChessPiece{
   protected boolean isVulnerable(BoardPosition boardPosition){   
 	boolean vulnerable = false;
 	ArrayList<ChessPiece> pieces = gameBoard.getOtherPlayer(owner).getPieces();   //loop through other players pieces, if they 
-	for (ChessPiece piece: pieces){                                               //can move to this position it is vulnerable
-	  if (piece.checkMoveAvailable().contains(boardPosition)){ 
-	    vulnerable = true;
+	for (ChessPiece piece: pieces){   	//can move to this position it is vulnerable	   
+      if (piece.getAvailableMoves().contains(boardPosition)){ 
+		vulnerable = true;
 		break;
 	  }	
 	}
