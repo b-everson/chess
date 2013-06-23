@@ -62,10 +62,28 @@ temp solution - signify with (p1) or (p2)
 
 
 
+determining if a king is in checkmate---
+   -if it can move to a position where it is not vulnerable it is not checkmate
+   -if a piece can block the path to the king it is not checkmate
+   -if a piece can take out piece that has king in check  & block any moves by other
+    pieces it is not checkmate <- problem with current code is that can't 
+    check potential moves, only current available moves with checkMoveAvailable()
+
+cycle through each chesspiece, add each possible move to list of BoardPositions
+for each boardPosition
+  if position.testVital() 
+  not in check
 
 
+boolean testPosition = false <- only true to check a single position
 
-
+(BoardPosition) 
+boolean testVital(Player playerInCheck)
+   boolean vital = true
+   testPosition = true
+   if playerPossibleMoves() includes king's position  
+      vital = false
+   testPosition = false
 
 
 game owns a board and two players
@@ -76,3 +94,8 @@ to check available moves for a piece, it must be aware of the board - pass board
 
 piece has boardposition, boardposition has piece? 
 
+
+king cannot move to any position where he is vulnerable, to check if other 
+king can move to a position, you have to ensure it is not vulnerable to other 
+pieces  <--maybe a list of currently available moves, set on begin of move() 
+then clear upon move
