@@ -73,11 +73,11 @@ public abstract class ChessPiece{
     this.position = position;
   }
   
-  private boolean checkVulnerability(BoardPosition boardPosition){   
+  protected boolean isVulnerable(BoardPosition boardPosition){   
 	boolean vulnerable = false;
 	ArrayList<ChessPiece> pieces = gameBoard.getOtherPlayer(owner).getPieces();   //loop through other players pieces, if they 
 	for (ChessPiece piece: pieces){                                               //can move to this position it is vulnerable
-	  if (piece.checkMoveAvailable().contains(this.position)){ 
+	  if (piece.checkMoveAvailable().contains(boardPosition)){ 
 	    vulnerable = true;
 		break;
 	  }	
