@@ -4,6 +4,25 @@ public class Pawn extends ChessPiece{
   private int direction = -1;
   boolean firstMove = true;
   
+  public int getDirection(){
+    return direction;
+  }
+  
+  protected void setAvailableMoves(){
+    ArrayList<BoardPosition> possibilities =  new ArrayList<BoardPosition>();
+	BoardPosition pos1 = gameBoard.getBoardPosition(position.getX() + 1, position.getY() + 1 * direction); //check 1 position forward based on direction, one to right on board orientation
+    if(pos1 != null){ 	
+	  if(pos1.occupiedByEnemy(this)) //only add if this position occupied by enemy
+	    possibilities.add(pos1);
+	}  
+	BoardPosition pos2 = gameBoard.getBoardPosition(position.getX() -1, position.getY() + 1 * direction); //check 1 position forward based on direction, one to left on board orientation
+	if(pos2 != null){
+	  if(pos2.occupiedByEnemy(this)) //only add if this position occupied by enemy
+	    possibilities.add(pos2);
+    }	
+	availableMoves = possibilities;
+  }
+  
   public Pawn(Player pOwner, Board bOwner){
     super(PAWN_CHAR, pOwner, bOwner);
 	if(!pOwner.getDescription().equals("(p1)")){
@@ -42,6 +61,7 @@ public class Pawn extends ChessPiece{
     boolean moveTrue = super.move(position);
 	if(moveTrue){
 	  firstMove = false;
+	  setAvailableMoves();
 	}
 	return moveTrue;
   }
