@@ -44,12 +44,12 @@ public class Pawn extends ChessPiece{
 	}
     BoardPosition pos3 = gameBoard.getBoardPosition(position.getX() + 1, position.getY() + 1 * direction); //check 1 position forward based on direction, one to right on board orientation
     if(pos3 != null){ 	
-	  if(pos3.occupiedByEnemy(this) || pos3.testPosition()) //only add if this position occupied by enemy
+	  if(pos3.occupiedByEnemy(this)) //only add if this position occupied by enemy
 	    possibilities.add(pos3);
 	}  
 	BoardPosition pos4 = gameBoard.getBoardPosition(position.getX() -1, position.getY() + 1 * direction); //check 1 position forward based on direction, one to left on board orientation
 	if(pos4 != null){
-	  if(pos4.occupiedByEnemy(this) || pos4.testPosition()) //only add if this position occupied by enemy
+	  if(pos4.occupiedByEnemy(this)) //only add if this position occupied by enemy
 	    possibilities.add(pos4);
     }	
 	return possibilities;

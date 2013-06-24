@@ -3,8 +3,6 @@ public class BoardPosition{
   private int yCoord;
   private ChessPiece currentPiece = null;
   private String contents = "       ";
-  private boolean testMove = false;
-  private ChessPiece testPiece = null;
   
   public BoardPosition(int x, int y){
     xCoord = x;
@@ -59,25 +57,7 @@ public class BoardPosition{
   public ChessPiece getPiece(){
     return currentPiece;
   }
-  
-  public void setTest(ChessPiece piece){
-    testPiece = piece;
-	testMove = true;
-  }
-  
-  public void endTest(){
-    testPiece = null;
-	testMove = false;
-  }
-  
-  public boolean testPosition(){
-    return testMove;
-  }
-  
-  public ChessPiece getTestPiece(){
-    return testPiece;
-  }
-  
+ 
   public String toString(){
     return contents;
   }
