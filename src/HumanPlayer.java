@@ -21,6 +21,7 @@ public class HumanPlayer extends Player{
 	  int yPos = selectPosition('y');
 	  acceptedMove = movePiece(chosenPiece,xPos,yPos);  //unacceptable move, try turn again
 	}while (!acceptedMove);
+	getBoard().getOtherPlayer(this).evaluateCheck();
   }
   
   private int selectPosition(char axis){

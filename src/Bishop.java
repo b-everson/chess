@@ -21,7 +21,7 @@ public class Bishop extends ChessPiece{
 	    checkPosition = gameBoard.getBoardPosition(x,y);
 		if(!checkPosition.isOccupied()){
 	      possibilities.add(checkPosition);
-	    }else if (checkPosition.occupiedByEnemy(this)){
+	    }else if (checkPosition.occupiedByEnemy(this) || checkPosition.testPosition()){
 	      possibilities.add(checkPosition);
 		  done = true;
 	    }else //position must be on the board, empty, occupied by enemy, or only remaining option is occupied by friendly
@@ -44,7 +44,7 @@ public class Bishop extends ChessPiece{
 	    checkPosition = gameBoard.getBoardPosition(x,y);
 		if(!checkPosition.isOccupied()){
 	      possibilities.add(checkPosition);
-	    }else if (checkPosition.occupiedByEnemy(this)){
+	    }else if (checkPosition.occupiedByEnemy(this) || checkPosition.testPosition()){
 	      possibilities.add(checkPosition);
 		  done = true;
 	    }else //position must be on the board, empty, occupied by enemy, or only remaining option is occupied by friendly
@@ -67,7 +67,7 @@ public class Bishop extends ChessPiece{
 	    checkPosition = gameBoard.getBoardPosition(x,y);
 		if(!checkPosition.isOccupied()){
 	      possibilities.add(checkPosition);
-	    }else if (checkPosition.occupiedByEnemy(this)){
+	    }else if (checkPosition.occupiedByEnemy(this) || checkPosition.testPosition()){
 	      possibilities.add(checkPosition);
 		  done = true;
 	    }else //position must be on the board, empty, occupied by enemy, or only remaining option is occupied by friendly
@@ -88,7 +88,7 @@ public class Bishop extends ChessPiece{
 	    checkPosition = gameBoard.getBoardPosition(x,y);
 		if(!checkPosition.isOccupied()){
 	      possibilities.add(checkPosition);
-	    }else if (checkPosition.occupiedByEnemy(this)){
+	    }else if (checkPosition.occupiedByEnemy(this) || checkPosition.testPosition()){
 	      possibilities.add(checkPosition);
 		  done = true;
 	    }else //position must be on the board, empty, occupied by enemy, or only remaining option is occupied by friendly

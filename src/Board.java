@@ -14,6 +14,18 @@ public class Board{
 	initializeBoard();
   }
   
+  public void update(){
+    update(player1);
+	update(player2);
+  }
+  
+  public void update(Player player){
+    for (ChessPiece piece : player.getPieces()){
+	  if(piece.getPosition() != null)
+	    piece.setVulnerablePositions();
+	}
+  }
+  
   //using array of characters
   public void drawBoard(){
     clearBoard();

@@ -12,15 +12,13 @@ public class Pawn extends ChessPiece{
     ArrayList<BoardPosition> possibilities =  new ArrayList<BoardPosition>();
 	BoardPosition pos1 = gameBoard.getBoardPosition(position.getX() + 1, position.getY() + 1 * direction); //check 1 position forward based on direction, one to right on board orientation
     if(pos1 != null){ 	
-	  if(pos1.occupiedByEnemy(this)) //only add if this position occupied by enemy
-	    possibilities.add(pos1);
+	  possibilities.add(pos1);
 	}  
 	BoardPosition pos2 = gameBoard.getBoardPosition(position.getX() -1, position.getY() + 1 * direction); //check 1 position forward based on direction, one to left on board orientation
 	if(pos2 != null){
-	  if(pos2.occupiedByEnemy(this)) //only add if this position occupied by enemy
-	    possibilities.add(pos2);
+	  possibilities.add(pos2);
     }	
-	availableMoves = possibilities;
+	vulnerablePositions = possibilities;
   }
   
   public Pawn(Player pOwner, Board bOwner){
@@ -46,12 +44,12 @@ public class Pawn extends ChessPiece{
 	}
     BoardPosition pos3 = gameBoard.getBoardPosition(position.getX() + 1, position.getY() + 1 * direction); //check 1 position forward based on direction, one to right on board orientation
     if(pos3 != null){ 	
-	  if(pos3.occupiedByEnemy(this)) //only add if this position occupied by enemy
+	  if(pos3.occupiedByEnemy(this) || pos3.testPosition()) //only add if this position occupied by enemy
 	    possibilities.add(pos3);
 	}  
 	BoardPosition pos4 = gameBoard.getBoardPosition(position.getX() -1, position.getY() + 1 * direction); //check 1 position forward based on direction, one to left on board orientation
 	if(pos4 != null){
-	  if(pos4.occupiedByEnemy(this)) //only add if this position occupied by enemy
+	  if(pos4.occupiedByEnemy(this) || pos4.testPosition()) //only add if this position occupied by enemy
 	    possibilities.add(pos4);
     }	
 	return possibilities;

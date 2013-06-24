@@ -21,6 +21,8 @@ public abstract class Player{
   private Pawn p7;
   private Pawn p8;
   private String playerDescription;
+  protected boolean check = false;
+  protected ArrayList<ChessPiece> vitalEnemies;
   
   public Board getBoard(){
     return this.board;
@@ -74,7 +76,8 @@ public abstract class Player{
 	pieces.add(13,p6);
 	pieces.add(14,p7);
 	pieces.add(15,p8);
-
+    
+	vitalEnemies = new ArrayList<ChessPiece>();
 	player1 = false;
   }
   
@@ -89,7 +92,18 @@ public abstract class Player{
 	return returnPiece;
   }
   
-
+  //need to see if position is vulnerable
+  public boolean evaluateCheck(){
+    ArrayList<ChessPiece> enemies = k.isVulnerable(k.getPosition());
+    if (enemies.size() > 0){
+	  check = true;
+	  vitalEnemies = enemies;
+	}else{
+	  check = false;
+	  vitalEnemies.clear();	  
+	}
+	return check;
+  }
   
   public void initializePiece(int piece,BoardPosition position){
     ChessPiece initPiece = pieces.get(piece);

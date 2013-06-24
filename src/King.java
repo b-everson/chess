@@ -22,8 +22,9 @@ public class King extends ChessPiece{
 	for (int i = 0; i < positions.length; i++){
 	  if(positions[i] != null){
 		if(!positions[i].occupiedByFriendly(this)){
-		  if(!isVulnerable(positions[i]))   
+		  if(isVulnerable(positions[i]).size() == 0){  	  
 		    possibilities.add(positions[i]);
+		  }
 		}
 	  }
 	}
@@ -31,7 +32,7 @@ public class King extends ChessPiece{
   }
   
   public boolean move(BoardPosition position){
-    if(isVulnerable(position)){
+    if(isVulnerable(position).size() > 0){
 	  System.out.println("Cannot move your king into check.");
 	  return false;
 	}  

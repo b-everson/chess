@@ -74,7 +74,7 @@ for each boardPosition
   if position.testVital() 
   not in check
 
-
+6/22
 boolean testPosition = false <- only true to check a single position
 
 (BoardPosition) 
@@ -99,3 +99,17 @@ king cannot move to any position where he is vulnerable, to check if other
 king can move to a position, you have to ensure it is not vulnerable to other 
 pieces  <--maybe a list of currently available moves, set on begin of move() 
 then clear upon move
+
+
+6/23
+Part of every player move should be to check if that move results in the 
+enemy player being in check, so test king piece, if it's position is vulnerable
+set check to true, this means that if in check it causes the only available moves
+are those that would remove the king from check, which leads to the testVital
+function planned above.
+
+One route could be to check if a piece's available moves include the other player's 
+king after it moves, but that doesn't include any cases where that move also opens
+up a path for another piece to make the king in check, so it might be best to simply
+search for any pieces that can put the king in check upon every move. 
+

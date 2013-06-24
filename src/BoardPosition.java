@@ -3,7 +3,9 @@ public class BoardPosition{
   private int yCoord;
   private ChessPiece currentPiece = null;
   private String contents = "       ";
-
+  private boolean testMove = false;
+  private ChessPiece testPiece = null;
+  
   public BoardPosition(int x, int y){
     xCoord = x;
 	yCoord = y;
@@ -43,7 +45,10 @@ public class BoardPosition{
     if(currentPiece != null)
 	  currentPiece.setInactive();
 	currentPiece = piece;
-	contents = currentPiece.toString();
+	if(currentPiece != null)
+	  contents = currentPiece.toString();
+	else
+	  contents = "       ";
   }
   
   public void clearPiece(){
@@ -55,6 +60,23 @@ public class BoardPosition{
     return currentPiece;
   }
   
+  public void setTest(ChessPiece piece){
+    testPiece = piece;
+	testMove = true;
+  }
+  
+  public void endTest(){
+    testPiece = null;
+	testMove = false;
+  }
+  
+  public boolean testPosition(){
+    return testMove;
+  }
+  
+  public ChessPiece getTestPiece(){
+    return testPiece;
+  }
   
   public String toString(){
     return contents;
