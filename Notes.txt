@@ -74,7 +74,7 @@ for each boardPosition
   if position.testVital() 
   not in check
 
-6/22
+6/22/13
 boolean testPosition = false <- only true to check a single position
 
 (BoardPosition) 
@@ -101,7 +101,7 @@ pieces  <--maybe a list of currently available moves, set on begin of move()
 then clear upon move
 
 
-6/23
+6/23/13
 Part of every player move should be to check if that move results in the 
 enemy player being in check, so test king piece, if it's position is vulnerable
 set check to true, this means that if in check it causes the only available moves
@@ -113,3 +113,21 @@ king after it moves, but that doesn't include any cases where that move also ope
 up a path for another piece to make the king in check, so it might be best to simply
 search for any pieces that can put the king in check upon every move. 
 
+6/25/13
+
+Now that game mechanics for check are in place the game needs to handle checkmate. 
+Thinking that putting a while loop on main game loop that terminates when either
+player's checkmate boolean returns true.
+
+Initial thoughts are that if the player is in check I loop through all of the players pieces,
+testing each to see if there is a move available that results in check being false. The
+testMove function accomplishes this, and the checkValidMoves() function returns an 
+ArrayList of moves for each piece that does not result in putting its player's 
+own king in check. 
+
+So from game class, after player moves, check if other player is in checkmate, 
+end player turn loop when checkmate, display message congratulatin winner.
+
+From the player class, create a list of possible moves, loop through each 
+piece the player owns, adding any valid moves to that list. Then, if count of that 
+list is zero, player is in checkmate.
