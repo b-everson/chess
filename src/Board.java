@@ -71,8 +71,8 @@ public class Board{
 	player1.initializePiece(3,getBoardPosition(6,7));
 	player1.initializePiece(4,getBoardPosition(2,7));
 	player1.initializePiece(5,getBoardPosition(5,7));
-	player1.initializePiece(6,getBoardPosition(4,7));
-	player1.initializePiece(7,getBoardPosition(3,7));
+	player1.initializePiece(6,getBoardPosition(3,7));
+	player1.initializePiece(7,getBoardPosition(4,7));
 	player1.initializePiece(8,getBoardPosition(0,6));
 	player1.initializePiece(9,getBoardPosition(1,6));
 	player1.initializePiece(10,getBoardPosition(2,6));
