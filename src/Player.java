@@ -21,7 +21,6 @@ public abstract class Player{
   private Pawn p7;
   private Pawn p8;
   private String playerDescription;
-  protected boolean check = false;
   protected ArrayList<ChessPiece> vitalEnemies;
   
   public Board getBoard(){
@@ -106,33 +105,33 @@ public abstract class Player{
   }
    
   public boolean evaluateCheckMate(){
-    setVitalEnemies();  //set all enemies that can move to kings position
-	ArrayList<BoardPosition> moves = new ArrayList<BoardPosition>();
-	//loop through each pieces moves, if a move 
+    boolean checkMate = false;
+    boolean enemyFound = false;
+	//loop through each pieces moves, if a move goes to an enemy's position, remove that enemy from the list of vital enemies
 	for(ChessPiece piece : pieces){
-	  for (BoardPosition position : piece.checkValidMoves() ){
+	  setVitalEnemies();  //set all enemies that can move to kings position
+	  for (BoardPosition position : piece.checkValidMoves() ){ //loop through moves to find one that lowers vital enemies count to zero
 	    for (ChessPiece enemy : getVitalEnemies()){
 	      if (enemy.getPosition() == position){
-		    vitalEnemies.remove(piece);
-		    System.out.println(vitalEnemies.size());
+		    checkMate = piece.testMove(position);
+			enemyFound = true;		
 		  }  
 	    }
 	  }
 	}
-
-	return vitalEnemies.size() > 0;
+	
+    if (!enemyFound && vitalEnemies.size() > 0)
+	  checkMate = true;
+	return checkMate;
   }
   
   //need to see if position is vulnerable
   public boolean evaluateCheck(){
-    setVitalEnemies();
+    boolean check = false;
+	setVitalEnemies();
     ArrayList<ChessPiece> enemies = vitalEnemies;
     if (enemies.size() > 0){
 	  check = true;
-	  vitalEnemies = enemies;
-	}else{
-	  check = false;
-	  vitalEnemies.clear();	  
 	}
 	return check;
   }
