@@ -22,9 +22,7 @@ public class King extends ChessPiece{
 	for (int i = 0; i < positions.length; i++){
 	  if(positions[i] != null){
 		if(!positions[i].occupiedByFriendly(this)){
-		  if(isVulnerable(positions[i]).size() == 0){  	  
-		    possibilities.add(positions[i]);
-		  }
+		  possibilities.add(positions[i]);  
 		}
 	  }
 	}
