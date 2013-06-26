@@ -23,18 +23,18 @@ public class Pawn extends ChessPiece{
   
   public Pawn(Player pOwner, Board bOwner){
     super(PAWN_CHAR, pOwner, bOwner);
-	if(!pOwner.getDescription().equals("(p1)")){
+	if(pOwner.getDescription().equals("(p1)")){
 	  direction = 1;
 	}
   }
   
   public ArrayList<BoardPosition> checkMoveAvailable(){   //get list of board positions 
-    ArrayList<BoardPosition> possibilities = new ArrayList<BoardPosition>();
+	ArrayList<BoardPosition> possibilities = new ArrayList<BoardPosition>();
     BoardPosition pos1 = gameBoard.getBoardPosition(position.getX(),position.getY() + 1 * direction); //check one position forward of pawn based on direction
     if(pos1 != null){	//if position is not within array values of board positions gameBoard.getBoardPosition returns null     
 	if (!pos1.isOccupied()){ //only add this position if space 1 position forward is empty
 	    possibilities.add(pos1);
-	  }  
+	  }
 	}  
 	BoardPosition pos2 = gameBoard.getBoardPosition(position.getX(), position.getY() + 2 * direction); //check 2 positions forward of pawn based on position if pawn's first move
 	if(pos2 != null){  

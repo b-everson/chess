@@ -65,39 +65,39 @@ public class Board{
   }
   
   public void initializeBoard(){
-    player1.initializePiece(0,getBoardPosition(0,7));
-	player1.initializePiece(1,getBoardPosition(7,7));
-	player1.initializePiece(2,getBoardPosition(1,7));
-	player1.initializePiece(3,getBoardPosition(6,7));
-	player1.initializePiece(4,getBoardPosition(2,7));
-	player1.initializePiece(5,getBoardPosition(5,7));
-	player1.initializePiece(6,getBoardPosition(3,7));
-	player1.initializePiece(7,getBoardPosition(4,7));
-	player1.initializePiece(8,getBoardPosition(0,6));
-	player1.initializePiece(9,getBoardPosition(1,6));
-	player1.initializePiece(10,getBoardPosition(2,6));
-	player1.initializePiece(11,getBoardPosition(3,6));
-	player1.initializePiece(12,getBoardPosition(4,6));
-	player1.initializePiece(13,getBoardPosition(5,6));
-	player1.initializePiece(14,getBoardPosition(6,6));
-	player1.initializePiece(15,getBoardPosition(7,6));
+    player2.initializePiece(0,getBoardPosition(0,7));
+	player2.initializePiece(1,getBoardPosition(7,7));
+	player2.initializePiece(2,getBoardPosition(1,7));
+	player2.initializePiece(3,getBoardPosition(6,7));
+	player2.initializePiece(4,getBoardPosition(2,7));
+	player2.initializePiece(5,getBoardPosition(5,7));
+	player2.initializePiece(6,getBoardPosition(3,7));
+	player2.initializePiece(7,getBoardPosition(4,7));
+	player2.initializePiece(8,getBoardPosition(0,6));
+	player2.initializePiece(9,getBoardPosition(1,6));
+	player2.initializePiece(10,getBoardPosition(2,6));
+	player2.initializePiece(11,getBoardPosition(3,6));
+	player2.initializePiece(12,getBoardPosition(4,6));
+	player2.initializePiece(13,getBoardPosition(5,6));
+	player2.initializePiece(14,getBoardPosition(6,6));
+	player2.initializePiece(15,getBoardPosition(7,6));
 	
-	player2.initializePiece(0,getBoardPosition(0,0));
-	player2.initializePiece(1,getBoardPosition(7,0));
-	player2.initializePiece(2,getBoardPosition(1,0));
-	player2.initializePiece(3,getBoardPosition(6,0));
-	player2.initializePiece(4,getBoardPosition(2,0));
-	player2.initializePiece(5,getBoardPosition(5,0));
-	player2.initializePiece(6,getBoardPosition(3,0));
-	player2.initializePiece(7,getBoardPosition(4,0));
-	player2.initializePiece(8,getBoardPosition(0,1));
-	player2.initializePiece(9,getBoardPosition(1,1));
-	player2.initializePiece(10,getBoardPosition(2,1));
-	player2.initializePiece(11,getBoardPosition(3,1));
-	player2.initializePiece(12,getBoardPosition(4,1));
-	player2.initializePiece(13,getBoardPosition(5,1));
-	player2.initializePiece(14,getBoardPosition(6,1));
-	player2.initializePiece(15,getBoardPosition(7,1));
+	player1.initializePiece(0,getBoardPosition(0,0));
+	player1.initializePiece(1,getBoardPosition(7,0));
+	player1.initializePiece(2,getBoardPosition(1,0));
+	player1.initializePiece(3,getBoardPosition(6,0));
+	player1.initializePiece(4,getBoardPosition(2,0));
+	player1.initializePiece(5,getBoardPosition(5,0));
+	player1.initializePiece(6,getBoardPosition(3,0));
+	player1.initializePiece(7,getBoardPosition(4,0));
+	player1.initializePiece(8,getBoardPosition(0,1));
+	player1.initializePiece(9,getBoardPosition(1,1));
+	player1.initializePiece(10,getBoardPosition(2,1));
+	player1.initializePiece(11,getBoardPosition(3,1));
+	player1.initializePiece(12,getBoardPosition(4,1));
+	player1.initializePiece(13,getBoardPosition(5,1));
+	player1.initializePiece(14,getBoardPosition(6,1));
+	player1.initializePiece(15,getBoardPosition(7,1));
   }
   
   public BoardPosition getBoardPosition(int x, int y){
