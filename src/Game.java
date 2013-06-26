@@ -7,6 +7,7 @@ public class Game{
 	chessBoard.initialize((Player)testPlayer1,(Player)testPlayer2);
 	chessBoard.drawBoard();
 	Player nextPlayer = testPlayer1;
+	boolean checkMate = false;
 	do{
 	nextPlayer.takeTurn();
 	chessBoard.drawBoard();
@@ -15,6 +16,17 @@ public class Game{
 	}else{
 	  nextPlayer = testPlayer1;
 	}
-	} while (playing);
+	checkMate = nextPlayer.evaluateCheckMate();
+	} while (!checkMate);
+	String winner;
+	String loser;
+	if(nextPlayer == testPlayer1){
+	  winner = "Player 2";
+	  loser = "Player 1";
+	}else{
+	  winner = "Player 1";
+	  loser = "Player 2";
+	}
+	System.out.println("Checkmate " + loser + ", Congratulations " + winner);
   }
 }

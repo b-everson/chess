@@ -21,15 +21,16 @@ public abstract class ChessPiece{
   
   public ArrayList<BoardPosition> checkValidMoves(){
     ArrayList<BoardPosition> moves = new ArrayList<BoardPosition>();
-	for (BoardPosition iPosition: checkMoveAvailable()){ // add positions from checkmove available to other arraylist
-	  moves.add(iPosition);
-	}
-    
-	for(int i = 0; i < moves.size(); i++){
-	  if(!testMove(moves.get(i))){ //if moving to this position results in test = false
-	    moves.set(i,null);
+	if(position != null){
+	  for (BoardPosition iPosition: checkMoveAvailable()){ // add positions from checkmove available to other arraylist
+	    moves.add(iPosition);
 	  }
-	}
+	  for(int i = 0; i < moves.size(); i++){
+	    if(!testMove(moves.get(i))){ //if moving to this position results in test = false
+	      moves.set(i,null);
+	    }
+	  }
+	}  
 	moves.trimToSize();
 	return moves;
   }
@@ -44,22 +45,23 @@ public abstract class ChessPiece{
 	boolean canMove = true;
 	String message = "";
 	
-	if(position != null){                        //move invalid if position already has player's piece in it
+	if(this.position != null){                        //move invalid if position already has player's piece in it
 	  if (position.occupiedByFriendly(this)) {
-	  canMove = false;
-	  message = "Cannot move into a space occupied by your own piece.";
+	    canMove = false;
+	    message = "Cannot move into a space occupied by your own piece.";
 	  }
-	}
-		
-	if(!checkMoveAvailable().contains(position) )  //move invalid if not in list of available moves 
-	{
-	  canMove = false;
-	  message = "Not a valid move.";
-	}
 	
-	if(!checkValidMoves().contains(position)){
-	  canMove = false;
-	  message = "Cannot move your king into check.";
+		
+	  if(!checkMoveAvailable().contains(position) )  //move invalid if not in list of available moves 
+	  {
+	    canMove = false;
+	    message = "Not a valid move.";
+	  }
+
+	  if(!checkValidMoves().contains(position)){
+	    canMove = false;
+	    message = "Cannot make a move that puts your king into check.";
+	  }
 	}
 	if(canMove){
 	  position.setPiece(this);   //set position's piece reference to this object
@@ -111,8 +113,10 @@ public abstract class ChessPiece{
 	ArrayList<ChessPiece> vitalPieces = new ArrayList<ChessPiece>();
 	ArrayList<ChessPiece> pieces = gameBoard.getOtherPlayer(owner).getPieces();   //loop through other players pieces, if they 
 	for (ChessPiece piece: pieces){   	//can move to this position it is vulnerable	   
-      if (piece.getVulnerablePositions().contains(boardPosition)){ 
-        vitalPieces.add(piece);
+      if(piece.getPosition() != null){
+	    if (piece.checkMoveAvailable().contains(boardPosition)){ 
+          vitalPieces.add(piece);
+		}  
 	  }	
 	}
 	return vitalPieces;

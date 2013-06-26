@@ -92,9 +92,41 @@ public abstract class Player{
 	return returnPiece;
   }
   
+  public void setVitalEnemies(){
+    vitalEnemies.clear();  //clear list
+	ArrayList<ChessPiece> enemies = k.isVulnerable(k.getPosition()); // any enemy that can move to kings position
+	for (ChessPiece piece : enemies)
+	{
+	  vitalEnemies.add(piece);   //if enemy can move to kings position add to list
+	}
+  }//set vital enemies
+  
+  public ArrayList<ChessPiece> getVitalEnemies(){
+    return vitalEnemies;
+  }
+   
+  public boolean evaluateCheckMate(){
+    setVitalEnemies();  //set all enemies that can move to kings position
+	ArrayList<BoardPosition> moves = new ArrayList<BoardPosition>();
+	//loop through each pieces moves, if a move 
+	for(ChessPiece piece : pieces){
+	  for (BoardPosition position : piece.checkValidMoves() ){
+	    for (ChessPiece enemy : getVitalEnemies()){
+	      if (enemy.getPosition() == position){
+		    vitalEnemies.remove(piece);
+		    System.out.println(vitalEnemies.size());
+		  }  
+	    }
+	  }
+	}
+
+	return vitalEnemies.size() > 0;
+  }
+  
   //need to see if position is vulnerable
   public boolean evaluateCheck(){
-    ArrayList<ChessPiece> enemies = k.isVulnerable(k.getPosition());
+    setVitalEnemies();
+    ArrayList<ChessPiece> enemies = vitalEnemies;
     if (enemies.size() > 0){
 	  check = true;
 	  vitalEnemies = enemies;
