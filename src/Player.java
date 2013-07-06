@@ -111,16 +111,16 @@ public abstract class Player{
 	for(ChessPiece piece : pieces){
 	  setVitalEnemies();  //set all enemies that can move to kings position
 	  for (BoardPosition position : piece.checkValidMoves() ){ //loop through moves to find one that lowers vital enemies count to zero
-	    for (ChessPiece enemy : getVitalEnemies()){
-	      if (enemy.getPosition() == position){
-		    checkMate = piece.testMove(position);
-			enemyFound = true;		
+	    for (ChessPiece enemy : getVitalEnemies()){  
+	      if (enemy.getPosition() == position){  //if move  can remove an enemy
+		    checkMate = piece.testMove(position);//test to see if move will bring player out of check
+			enemyFound = true;	//	
 		  }  
 	    }
 	  }
 	}
 	
-    if (!enemyFound && vitalEnemies.size() > 0)
+    if (!enemyFound && vitalEnemies.size() > 0) //if king is in check and no availble move can take out piece putting king in check 
 	  checkMate = true;
 	return checkMate;
   }
