@@ -131,3 +131,12 @@ end player turn loop when checkmate, display message congratulatin winner.
 From the player class, create a list of possible moves, loop through each 
 piece the player owns, adding any valid moves to that list. Then, if count of that 
 list is zero, player is in checkmate.
+
+7/6/13
+For AI player I want to implement the minimax algorithm. This compares moves by value,
+value is determined by a value assigned to pieces. Taking an enemy piece gives a positve score, 
+losing one of your own results in negative. 
+
+Without comparing moves of pieces it wasunnecessary to keep the originating piece of 
+a move in the move function, now to find the best move all available moves from each 
+piece must be evaluated, and the added context of originating piece is required.   
