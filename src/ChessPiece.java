@@ -6,8 +6,9 @@ public abstract class ChessPiece{
   private String playerInfo;
   protected BoardPosition position = null;
   protected ArrayList<BoardPosition> vulnerablePositions;
+  private int value;
   
-  public ChessPiece(char symbol, Player pOwner, Board bOwner){
+  public ChessPiece(char symbol, Player pOwner, Board bOwner, int pieceValue){
     pieceChar = symbol;
 	owner = pOwner;
 	playerInfo = pOwner.getDescription();
@@ -37,6 +38,10 @@ public abstract class ChessPiece{
   
   public void setVulnerablePositions(){
     vulnerablePositions = checkMoveAvailable();
+  }
+  
+  public int getValue(){
+    return value;
   }
   
   public abstract ArrayList<BoardPosition> checkMoveAvailable(); // return array of possible moves 
@@ -122,7 +127,6 @@ public abstract class ChessPiece{
 	return vitalPieces;
   }
   
-  //this function not working as intended, position still has old piece in it when evaluateCheck() is called
   protected boolean testMove(BoardPosition position){
     ChessPiece testChessPiece = position.getPiece();   //save chesspiece in position intending to move to
 	BoardPosition originalPosition = this.getPosition();  //save original position to undo  test

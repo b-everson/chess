@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 public class Bishop extends ChessPiece{
   private static final char BISHOP_CHAR = 'b';
+  private static final int BISHOP_VALUE = 3;
   
   public Bishop(Player pOwner, Board bOwner){
-    super(BISHOP_CHAR, pOwner, bOwner);
+    super(BISHOP_CHAR, pOwner, bOwner, BISHOP_VALUE);
   }
   
   public ArrayList<BoardPosition> checkMoveAvailable(){

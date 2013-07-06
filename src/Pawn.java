@@ -3,6 +3,7 @@ public class Pawn extends ChessPiece{
   private static final char PAWN_CHAR = 'p';
   private int direction = -1;
   boolean firstMove = true;
+  private static final int PAWN_VALUE = 1;
   
   public int getDirection(){
     return direction;
@@ -22,7 +23,7 @@ public class Pawn extends ChessPiece{
   }
   
   public Pawn(Player pOwner, Board bOwner){
-    super(PAWN_CHAR, pOwner, bOwner);
+    super(PAWN_CHAR, pOwner, bOwner, PAWN_VALUE);
 	if(pOwner.getDescription().equals("(p1)")){
 	  direction = 1;
 	}

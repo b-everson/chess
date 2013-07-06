@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 public class Queen extends ChessPiece{
   private static final char QUEEN_CHAR = 'Q';
+  private static final int QUEEN_VALUE = 9;
   
   public Queen(Player pOwner, Board bOwner){
-    super(QUEEN_CHAR, pOwner, bOwner);
+    super(QUEEN_CHAR, pOwner, bOwner, QUEEN_VALUE);
   }
   
  public ArrayList<BoardPosition> checkMoveAvailable(){  
