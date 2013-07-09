@@ -60,7 +60,6 @@ public class Pawn extends ChessPiece{
     boolean moveTrue = super.move(position);
 	if(moveTrue){
 	  firstMove = false;
-	  System.out.println("bacon");
 	  setVulnerablePositions();
 	}
 	return moveTrue;
