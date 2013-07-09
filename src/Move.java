@@ -12,6 +12,10 @@ public class Move{
     return startingPosition;
   }
   
+  public ChessPiece getStartPiece(){
+    return startingPiece;
+  }
+  
   public Move(ChessPiece piece, BoardPosition end){
     this(piece.getPosition(), end);
   }
