@@ -4,12 +4,6 @@ public class Move{
   private ChessPiece startingPiece;
   private ChessPiece endingPiece;
   
-  private int score = 0;
-  
-  public int getScore(){
-    return score;
-  }
-  
   public BoardPosition getEndPosition(){
     return endingPosition;
   }
@@ -24,7 +18,6 @@ public class Move{
 	startingPiece = start.getPiece();    
 	if(endingPosition.getPiece() != null){
 	  endingPiece = endingPosition.getPiece();
-	  score = endingPosition.getPiece().getValue();
 	}  
   }
   
