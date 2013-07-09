@@ -12,23 +12,22 @@ public class AIPlayer extends Player{
   
   public MoveEvaluation minimax(int depth,Player player,Player opponent){
     ArrayList<Move> validMoves = player.validMoves();
-	MoveEvaluation best = new MoveEvaluation(null,0);
+	MoveEvaluation best = new MoveEvaluation(null,player);
 	if(depth == 0 || validMoves.size() == 0){
-	  return new MoveEvaluation(null, player.evaluateBoard());
+	  return new MoveEvaluation(null, player);
 	}
 	
-	for (Move move : validMoves){
+	for (Move move : validMoves){  //for every move that is valid
 	  move.perform();
-	  validMoves = player.validMoves();
-	  int score = player.evaluateBoard();
 	  MoveEvaluation nextEval = minimax(depth - 1, opponent, player);
+	  int score = nextEval.getScore();
 	  move.undo();
 	  if(player == this){
-	    if (best.getScore() <= score){
+	    if (best.getScore() < score){
 		  best = new MoveEvaluation(move,score);
 		}
 	  }else{
-	    if (best.getScore() >= score ){
+	    if (best.getScore() > score ){
 		  best = new MoveEvaluation(move,score);
 		}
 	  }
@@ -39,7 +38,8 @@ public class AIPlayer extends Player{
   
   public void takeTurn(){
     Move move = bestMove();
-	move.perform();
+
+	move.getStartPiece().move(move.getEndPosition());
 	
   }
 }

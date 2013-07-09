@@ -155,6 +155,9 @@ public abstract class Player{
 	for (ChessPiece piece : pieces){
 	  if (piece.isActive()){
 	    score += piece.getValue() * 2;
+		if(piece.isVulnerable(piece.getPosition()).size() > 0){
+		  score -= piece.getValue() * 1.5;
+		}
 	  }
 	}
 	//doubling value of current pieces creates higher value for active pieces than vulnerable pieces

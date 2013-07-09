@@ -149,3 +149,7 @@ move 2 spaces forward beyond the first move, unlike the human player, which cann
 Minimax function isn't working as intended, the AI player will move pieces out of danger, but 
 prioritizes moving towards putting pieces under attack instead of being defensive, so need to 
 look into minimax implementation as well as players evaluation of a game state.
+With a minor tweak to give a player's own movement being under attack a -1.5 * piece value I believe
+that that would give the AIPlayer the proper calculation to not purposely put its own pieces in check,
+but with running the program with that change the AI player is not returning moves because there are none more 
+favorable than the starting layout.
