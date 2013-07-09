@@ -7,8 +7,8 @@ public class Bishop extends ChessPiece{
     super(BISHOP_CHAR, pOwner, bOwner, BISHOP_VALUE);
   }
   
-  public ArrayList<BoardPosition> checkMoveAvailable(){
-    ArrayList<BoardPosition> possibilities = new ArrayList<BoardPosition>();
+  public ArrayList<Move> checkMoveAvailable(){
+    ArrayList<Move> possibilities = new ArrayList<Move>();
 	//Add each available position extending y++, x++  check position add empty, enemy then break, break on friendly
 	//Do this until position isn't valid board position
 	boolean done = false;
@@ -21,9 +21,9 @@ public class Bishop extends ChessPiece{
 	  else {
 	    checkPosition = gameBoard.getBoardPosition(x,y);
 		if(!checkPosition.isOccupied()){
-	      possibilities.add(checkPosition);
+	      possibilities.add(new Move(this, checkPosition));
 	    }else if (checkPosition.occupiedByEnemy(this)){
-	      possibilities.add(checkPosition);
+	      possibilities.add(new Move(this, checkPosition));
 		  done = true;
 	    }else //position must be on the board, empty, occupied by enemy, or only remaining option is occupied by friendly
 	    done = true;
@@ -44,9 +44,9 @@ public class Bishop extends ChessPiece{
 	  else {
 	    checkPosition = gameBoard.getBoardPosition(x,y);
 		if(!checkPosition.isOccupied()){
-	      possibilities.add(checkPosition);
+	      possibilities.add(new Move(this, checkPosition));
 	    }else if (checkPosition.occupiedByEnemy(this)){
-	      possibilities.add(checkPosition);
+	      possibilities.add(new Move(this, checkPosition));
 		  done = true;
 	    }else //position must be on the board, empty, occupied by enemy, or only remaining option is occupied by friendly
 	    done = true;
@@ -67,9 +67,9 @@ public class Bishop extends ChessPiece{
 	  else {
 	    checkPosition = gameBoard.getBoardPosition(x,y);
 		if(!checkPosition.isOccupied()){
-	      possibilities.add(checkPosition);
+	      possibilities.add(new Move(this, checkPosition));
 	    }else if (checkPosition.occupiedByEnemy(this)){
-	      possibilities.add(checkPosition);
+	      possibilities.add(new Move(this, checkPosition));
 		  done = true;
 	    }else //position must be on the board, empty, occupied by enemy, or only remaining option is occupied by friendly
 	    done = true;
@@ -88,9 +88,9 @@ public class Bishop extends ChessPiece{
 	  else {
 	    checkPosition = gameBoard.getBoardPosition(x,y);
 		if(!checkPosition.isOccupied()){
-	      possibilities.add(checkPosition);
+	      possibilities.add(new Move(this, checkPosition));
 	    }else if (checkPosition.occupiedByEnemy(this)){
-	      possibilities.add(checkPosition);
+	      possibilities.add(new Move(this, checkPosition));
 		  done = true;
 	    }else //position must be on the board, empty, occupied by enemy, or only remaining option is occupied by friendly
 	    done = true;

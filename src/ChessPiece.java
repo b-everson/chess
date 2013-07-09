@@ -20,15 +20,16 @@ public abstract class ChessPiece{
     return vulnerablePositions;
   }
   
-  public ArrayList<BoardPosition> checkValidMoves(){
-    ArrayList<BoardPosition> moves = new ArrayList<BoardPosition>();
+  public ArrayList<Move> checkValidMoves(){
+    ArrayList<Move> moves = new ArrayList<Move>();
 	if(position != null){
-	  for (BoardPosition iPosition: checkMoveAvailable()){ // add positions from checkmove available to other arraylist
-	    moves.add(iPosition);
+	  for (Move iMove: checkMoveAvailable()){ // add positions from checkmove available to other arraylist
+	    moves.add(iMove);
 	  }
-	  for(int i = 0; i < moves.size(); i++){
+	  
+	  for(int i = moves.size()-1; i >= 0; i--){
 	    if(!testMove(moves.get(i))){ //if moving to this position results in test = false
-	      moves.set(i,null);
+	      moves.remove(i);   
 	    }
 	  }
 	}  
@@ -37,14 +38,17 @@ public abstract class ChessPiece{
   }
   
   public void setVulnerablePositions(){
-    vulnerablePositions = checkMoveAvailable();
+    vulnerablePositions.clear();
+	for (Move iMove : checkMoveAvailable()){
+	  vulnerablePositions.add(iMove.getEndPosition());
+	}
   }
   
   public int getValue(){
     return value;
   }
   
-  public abstract ArrayList<BoardPosition> checkMoveAvailable(); // return array of possible moves 
+  public abstract ArrayList<Move> checkMoveAvailable(); // return array of possible moves 
   
   public boolean move(BoardPosition position){
 	boolean canMove = true;
@@ -55,23 +59,36 @@ public abstract class ChessPiece{
 	    canMove = false;
 	    message = "Cannot move into a space occupied by your own piece.";
 	  }
-	
-		
-	  if(!checkMoveAvailable().contains(position) )  //move invalid if not in list of available moves 
+	  
+	  boolean moveFound = false;
+	  for(Move iMove : checkMoveAvailable()){
+        if(iMove.getEndPosition() == position){
+		  moveFound = true;
+		}
+      }	  
+	  
+	  if(!moveFound)  //move invalid if not in list of available moves 
 	  {
 	    canMove = false;
 	    message = "Not a valid move.";
 	  }
-
-	  if(!checkValidMoves().contains(position)){
+      
+	  boolean validMove = false;
+	  for(Move nextMove : checkValidMoves()){
+	    if(nextMove.getEndPosition() == position){
+		  validMove = true;
+		}
+	  }
+	  
+	  if(!validMove){
 	    canMove = false;
 	    message = "Cannot make a move that puts your king into check.";
-	  }
+	  }	  
 	}
+
 	if(canMove){
-	  position.setPiece(this);   //set position's piece reference to this object
-	  this.setPosition(position); //set BoardPosition reference to position 
-	  setVulnerablePositions();
+	  Move myMove = new Move(this, position);
+	  myMove.perform();	  
 	}  
 	else
 	  System.out.println(message);
@@ -98,6 +115,7 @@ public abstract class ChessPiece{
   
   //function called only when adding a piece to the board
   public void initialize(BoardPosition position){
+	position.setPiece(this);
     this.position = position;
   }
   
@@ -119,14 +137,18 @@ public abstract class ChessPiece{
 	ArrayList<ChessPiece> pieces = gameBoard.getOtherPlayer(owner).getPieces();   //loop through other players pieces, if they 
 	for (ChessPiece piece: pieces){   	//can move to this position it is vulnerable	   
       if(piece.getPosition() != null){
-	    if (piece.checkMoveAvailable().contains(boardPosition)){ 
-          vitalPieces.add(piece);
+	    for(Move thisMove : piece.checkMoveAvailable()){
+		  if(boardPosition == thisMove.getEndPosition()){
+            vitalPieces.add(piece);
+		  }
 		}  
 	  }	
 	}
 	return vitalPieces;
   }
   
+  
+  /*
   protected boolean testMove(BoardPosition position){
     ChessPiece testChessPiece = position.getPiece();   //save chesspiece in position intending to move to
 	BoardPosition originalPosition = this.getPosition();  //save original position to undo  test
@@ -144,6 +166,15 @@ public abstract class ChessPiece{
 	this.setPosition(originalPosition);
 	gameBoard.update();
 	owner.evaluateCheck(); 
+	return goodMove;
+  }*/
+  
+  protected boolean testMove(Move tMove){
+    tMove.perform();
+	gameBoard.update();
+	boolean goodMove = !owner.evaluateCheck();
+	tMove.undo();
+	gameBoard.update();
 	return goodMove;
   }
   

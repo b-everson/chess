@@ -1,0 +1,45 @@
+A move has a starting position, and an ending position. It is valid 
+if the piece from the original position moving to the next 
+
+
+need to find every place where a move is used in code
+
+-Every chess piece class has references to moves 
+
+-pawn.checkMoveAvailable
+
+-Chesspiece.checkValidMoves()   --changed
+  change BoardPosition iPosition to a move type
+  
+--chessPiece.setVulnerablePositions() -- changed
+
+-Chesspiece.setVulnerablePositions() - checkMoveAvailable will be moves instead 
+of boardPositions, loop through checkMoveAvailable() pulling endingPosition from 
+each to create arraylist of boardPositions  --changed
+
+-ChessPiece.move()
+  if(checkMoveAvailable contains  
+
+  if (canMove)
+    new Move(this, position).perform() 
+
+-ChessPiece.isVulnerable()
+  for Move : piece.checkMoveAvailble()
+    if(boardPosition == move.getEndPosition)
+
+-ChessPiece testMove(Move move)
+  move.perform()
+  update board
+  boolean goodMove = !owner.evaluateCheck() 
+  move.undo()
+  update board
+
+- Player.evaluateCheckmate()
+
+
+
+
+
+
+--need to check ChessPiece line 32 for issues related to removing element within
+loop

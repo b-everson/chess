@@ -8,8 +8,8 @@ public class Knight extends ChessPiece{
   }
   
   //need positions 1 up 2 left, 1 up 2 right, 2 up 1 left, 2 up 1 right, 1 down 2 left, 1 down 2 right, 2 down 1 left, 2 down 1 right
-  public ArrayList<BoardPosition> checkMoveAvailable(){
-    ArrayList<BoardPosition> possibilities = new ArrayList<BoardPosition>();
+  public ArrayList<Move> checkMoveAvailable(){
+    ArrayList<Move> possibilities = new ArrayList<Move>();
 	BoardPosition[] positions = new BoardPosition[8];
 	positions[0] = gameBoard.getBoardPosition(position.getX() - 2, position.getY() + 1); //1 up 2 left 
 	positions[1] = gameBoard.getBoardPosition(position.getX() + 2, position.getY() + 1); //1 up 2 right
@@ -22,7 +22,7 @@ public class Knight extends ChessPiece{
 	for (int i = 0; i < positions.length; i++){
 	  if (positions[i] != null ){
 	    if(!positions[i].occupiedByFriendly(this)){
-	      possibilities.add(positions[i]);
+	      possibilities.add(new Move(this, positions[i]));
 	    }
 	  }
 	}

@@ -7,8 +7,8 @@ public class King extends ChessPiece{
     super(KING_CHAR, pOwner, bOwner, KING_VALUE);
   }
   
-  public ArrayList<BoardPosition> checkMoveAvailable(){
-    ArrayList<BoardPosition> possibilities = new ArrayList<BoardPosition>();
+  public ArrayList<Move> checkMoveAvailable(){
+    ArrayList<Move> possibilities = new ArrayList<Move>();
 	int x = position.getX();
 	int y = position.getY();
 	BoardPosition[] positions = new BoardPosition[8];
@@ -23,7 +23,7 @@ public class King extends ChessPiece{
 	for (int i = 0; i < positions.length; i++){
 	  if(positions[i] != null){
 		if(!positions[i].occupiedByFriendly(this)){
-		  possibilities.add(positions[i]);  
+		  possibilities.add(new Move(this, positions[i]));  
 		}
 	  }
 	}

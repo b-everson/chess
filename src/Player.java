@@ -110,10 +110,10 @@ public abstract class Player{
 	//loop through each pieces moves, if a move goes to an enemy's position, remove that enemy from the list of vital enemies
 	for(ChessPiece piece : pieces){
 	  setVitalEnemies();  //set all enemies that can move to kings position
-	  for (BoardPosition position : piece.checkValidMoves() ){ //loop through moves to find one that lowers vital enemies count to zero
-	    for (ChessPiece enemy : getVitalEnemies()){  
-	      if (enemy.getPosition() == position){  //if move  can remove an enemy
-		    checkMate = piece.testMove(position);//test to see if move will bring player out of check
+	  for (Move move : piece.checkValidMoves() ){ //loop through moves to find one that lowers vital enemies count to zero
+		for (ChessPiece enemy : getVitalEnemies()){  
+		  if (enemy.getPosition() == move.getEndPosition()){  //if move  can remove an enemy
+		    checkMate = piece.testMove(move);//test to see if move will bring player out of check
 			enemyFound = true;	//	
 		  }  
 	    }
@@ -129,8 +129,7 @@ public abstract class Player{
   public boolean evaluateCheck(){
     boolean check = false;
 	setVitalEnemies();
-    ArrayList<ChessPiece> enemies = vitalEnemies;
-    if (enemies.size() > 0){
+    if (vitalEnemies.size() > 0){
 	  check = true;
 	}
 	return check;

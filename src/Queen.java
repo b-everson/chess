@@ -7,15 +7,15 @@ public class Queen extends ChessPiece{
     super(QUEEN_CHAR, pOwner, bOwner, QUEEN_VALUE);
   }
   
- public ArrayList<BoardPosition> checkMoveAvailable(){  
-	ArrayList<BoardPosition> possibilities = new ArrayList<BoardPosition>();
+ public ArrayList<Move> checkMoveAvailable(){  
+	ArrayList<Move> possibilities = new ArrayList<Move>();
 	//Add each available position extending x --            check position add empty, add enemy then break,   break on friendly
 	for(int x = position.getX() - 1; x >= 0; x--){
 	  BoardPosition checkPosition = gameBoard.getBoardPosition(x, position.getY());
 	  if (!checkPosition.isOccupied()){
-	     possibilities.add(checkPosition);
+	     possibilities.add(new Move(this, checkPosition));
 	  }else if (checkPosition.occupiedByEnemy(this)){
-	    possibilities.add(checkPosition);
+	    possibilities.add(new Move(this, checkPosition));
 		break;  //break after adding first enemy piece
 	  }else{
 	    break;  //break on friendly piece 
@@ -26,9 +26,9 @@ public class Queen extends ChessPiece{
 	for(int x = position.getX() + 1; x <= Board.BOARD_WIDTH; x++){
 	  BoardPosition checkPosition = gameBoard.getBoardPosition(x, position.getY());
 	  if (!checkPosition.isOccupied()){
-	     possibilities.add(checkPosition);
+	     possibilities.add(new Move(this, checkPosition));
 	  }else if (checkPosition.occupiedByEnemy(this)){
-	    possibilities.add(checkPosition);
+	    possibilities.add(new Move(this, checkPosition));
 		break;  //break after adding first enemy piece
 	  }else{
 	    break;  //break on friendly piece 
@@ -39,9 +39,9 @@ public class Queen extends ChessPiece{
 	for(int y = position.getY() - 1; y >= 0; y--){
 	  BoardPosition checkPosition = gameBoard.getBoardPosition(position.getX(), y);
 	  if (!checkPosition.isOccupied()){
-	     possibilities.add(checkPosition);
+	     possibilities.add(new Move(this, checkPosition));
 	  }else if (checkPosition.occupiedByEnemy(this)){
-	    possibilities.add(checkPosition);
+	    possibilities.add(new Move(this, checkPosition));
 		break;  //break after adding first enemy piece
 	  }else{
 	    break;  //break on friendly piece 
@@ -52,9 +52,9 @@ public class Queen extends ChessPiece{
 	for(int y = position.getY() + 1; y <= Board.BOARD_HEIGHT; y++){
 	  BoardPosition checkPosition = gameBoard.getBoardPosition(position.getX(), y);
 	  if (!checkPosition.isOccupied()){
-	     possibilities.add(checkPosition);
+	     possibilities.add(new Move(this, checkPosition));
 	  }else if (checkPosition.occupiedByEnemy(this)){
-	    possibilities.add(checkPosition);
+	    possibilities.add(new Move(this, checkPosition));
 		break;  //break after adding first enemy piece
 	  }else{
 	    break;  //break on friendly piece 
@@ -74,9 +74,9 @@ public class Queen extends ChessPiece{
 	  else {
 	    checkPosition = gameBoard.getBoardPosition(x,y);
 		if(!checkPosition.isOccupied()){
-	      possibilities.add(checkPosition);
+	      possibilities.add(new Move(this, checkPosition));
 	    }else if (checkPosition.occupiedByEnemy(this)){
-	      possibilities.add(checkPosition);
+	      possibilities.add(new Move(this, checkPosition));
 		  done = true;
 	    }else //position must be on the board, empty, occupied by enemy, or only remaining option is occupied by friendly
 	    done = true;
@@ -97,9 +97,9 @@ public class Queen extends ChessPiece{
 	  else {
 	    checkPosition = gameBoard.getBoardPosition(x,y);
 		if(!checkPosition.isOccupied()){
-	      possibilities.add(checkPosition);
+	      possibilities.add(new Move(this, checkPosition));
 	    }else if (checkPosition.occupiedByEnemy(this)){
-	      possibilities.add(checkPosition);
+	      possibilities.add(new Move(this, checkPosition));
 		  done = true;
 	    }else //position must be on the board, empty, occupied by enemy, or only remaining option is occupied by friendly
 	    done = true;
@@ -120,9 +120,9 @@ public class Queen extends ChessPiece{
 	  else {
 	    checkPosition = gameBoard.getBoardPosition(x,y);
 		if(!checkPosition.isOccupied()){
-	      possibilities.add(checkPosition);
+	      possibilities.add(new Move(this, checkPosition));
 	    }else if (checkPosition.occupiedByEnemy(this)){
-	      possibilities.add(checkPosition);
+	      possibilities.add(new Move(this, checkPosition));
 		  done = true;
 	    }else //position must be on the board, empty, occupied by enemy, or only remaining option is occupied by friendly
 	    done = true;
@@ -141,9 +141,9 @@ public class Queen extends ChessPiece{
 	  else {
 	    checkPosition = gameBoard.getBoardPosition(x,y);
 		if(!checkPosition.isOccupied()){
-	      possibilities.add(checkPosition);
+	      possibilities.add(new Move(this, checkPosition));
 	    }else if (checkPosition.occupiedByEnemy(this)){
-	      possibilities.add(checkPosition);
+	      possibilities.add(new Move(this, checkPosition));
 		  done = true;
 	    }else //position must be on the board, empty, occupied by enemy, or only remaining option is occupied by friendly
 	    done = true;
@@ -151,8 +151,6 @@ public class Queen extends ChessPiece{
 	    y -= 1; 
 	  }
 	} while (!done);
-	
-	
 	
 	return possibilities;
   }

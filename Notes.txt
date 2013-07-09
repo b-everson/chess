@@ -137,6 +137,6 @@ For AI player I want to implement the minimax algorithm. This compares moves by 
 value is determined by a value assigned to pieces. Taking an enemy piece gives a positve score, 
 losing one of your own results in negative. 
 
-Without comparing moves of pieces it wasunnecessary to keep the originating piece of 
+Without comparing moves of pieces it was unnecessary to keep the originating piece of 
 a move in the move function, now to find the best move all available moves from each 
 piece must be evaluated, and the added context of originating piece is required.   
