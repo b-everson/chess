@@ -144,3 +144,8 @@ piece must be evaluated, and the added context of originating piece is required.
 7/8/13
 So AI Player makes moves to put player in checkmate, but for some reason the pawn is able to 
 move 2 spaces forward beyond the first move, unlike the human player, which cannot.  
+
+7/9/13
+Minimax function isn't working as intended, the AI player will move pieces out of danger, but 
+prioritizes moving towards putting pieces under attack instead of being defensive, so need to 
+look into minimax implementation as well as players evaluation of a game state.
