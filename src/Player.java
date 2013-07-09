@@ -140,4 +140,35 @@ public abstract class Player{
 	initPiece.initialize(position);
   }
   
+  public ArrayList<Move> validMoves(){
+    ArrayList<Move> myMoves = new ArrayList<Move>();
+	for (ChessPiece piece : pieces ){
+	  for(Move pieceMove : piece.checkValidMoves()){
+	    myMoves.add(pieceMove);
+	  }
+	}
+	return myMoves;
+  }
+  
+  public int evaluateBoard(){
+    int score = 0;
+	for (ChessPiece piece : pieces){
+	  if (piece.isActive()){
+	    score += piece.getValue() * 2;
+	  }
+	}
+	//doubling value of current pieces creates higher value for active pieces than vulnerable pieces
+	//this is so that putting pieces under attack is valued, but not as much as actually removing them.
+	for (ChessPiece enemy : board.getOtherPlayer(this).getPieces()){
+	  if(enemy.isActive()){
+	    score -= enemy.getValue() * 2;  
+	      if (enemy.isVulnerable(enemy.getPosition()).size() > 0){ 
+		    score += enemy.getValue();
+	      }
+	  }                                 
+
+	}
+	return score;
+  }
+  
 }

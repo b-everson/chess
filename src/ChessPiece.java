@@ -14,6 +14,7 @@ public abstract class ChessPiece{
 	playerInfo = pOwner.getDescription();
 	gameBoard = bOwner;
 	vulnerablePositions = new ArrayList<BoardPosition>();
+	value = pieceValue;
   }
   
   public ArrayList<BoardPosition> getVulnerablePositions(){
@@ -59,19 +60,6 @@ public abstract class ChessPiece{
 	    canMove = false;
 	    message = "Cannot move into a space occupied by your own piece.";
 	  }
-	  
-	  boolean moveFound = false;
-	  for(Move iMove : checkMoveAvailable()){
-        if(iMove.getEndPosition() == position){
-		  moveFound = true;
-		}
-      }	  
-	  
-	  if(!moveFound)  //move invalid if not in list of available moves 
-	  {
-	    canMove = false;
-	    message = "Not a valid move.";
-	  }
       
 	  boolean validMove = false;
 	  for(Move nextMove : checkValidMoves()){
@@ -84,6 +72,19 @@ public abstract class ChessPiece{
 	    canMove = false;
 	    message = "Cannot make a move that puts your king into check.";
 	  }	  
+	  
+	  	  boolean moveFound = false;
+	  for(Move iMove : checkMoveAvailable()){
+        if(iMove.getEndPosition() == position){
+		  moveFound = true;
+		}
+      }	  
+	  
+	  if(!moveFound)  //move invalid if not in list of available moves 
+	  {
+	    canMove = false;
+	    message = "Not a valid move.";
+	  }
 	}
 
 	if(canMove){
@@ -178,4 +179,7 @@ public abstract class ChessPiece{
 	return goodMove;
   }
   
+  public boolean isActive(){
+    return position != null;
+  }
 }

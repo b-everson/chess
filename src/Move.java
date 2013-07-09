@@ -8,6 +8,10 @@ public class Move{
     return endingPosition;
   }
   
+  public BoardPosition getStartPosition(){
+    return startingPosition;
+  }
+  
   public Move(ChessPiece piece, BoardPosition end){
     this(piece.getPosition(), end);
   }

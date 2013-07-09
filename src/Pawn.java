@@ -40,7 +40,7 @@ public class Pawn extends ChessPiece{
 	BoardPosition pos2 = gameBoard.getBoardPosition(position.getX(), position.getY() + 2 * direction); //check 2 positions forward of pawn based on position if pawn's first move
 	if(pos2 != null){  
 	  if(firstMove && !pos2.isOccupied()){  // only add this position if space 2 positions forward is empty and it is pawn's first move
-	    possibilities.add(new Move(this, pos2));
+		possibilities.add(new Move(this, pos2));
 	  }
 	}
     BoardPosition pos3 = gameBoard.getBoardPosition(position.getX() + 1, position.getY() + 1 * direction); //check 1 position forward based on direction, one to right on board orientation
@@ -60,6 +60,7 @@ public class Pawn extends ChessPiece{
     boolean moveTrue = super.move(position);
 	if(moveTrue){
 	  firstMove = false;
+	  System.out.println("bacon");
 	  setVulnerablePositions();
 	}
 	return moveTrue;

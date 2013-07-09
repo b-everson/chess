@@ -3,7 +3,7 @@ public class Game{
 	boolean playing = true;
 	Board chessBoard = new Board();
 	HumanPlayer testPlayer1 = new HumanPlayer(chessBoard);
-	HumanPlayer testPlayer2 = new HumanPlayer(chessBoard);
+	AIPlayer testPlayer2 = new AIPlayer(chessBoard);
 	chessBoard.initialize((Player)testPlayer1,(Player)testPlayer2);
 	chessBoard.drawBoard();
 	Player nextPlayer = testPlayer1;
