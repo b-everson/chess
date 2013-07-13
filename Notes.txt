@@ -153,3 +153,17 @@ With a minor tweak to give a player's own movement being under attack a -1.5 * p
 that that would give the AIPlayer the proper calculation to not purposely put its own pieces in check,
 but with running the program with that change the AI player is not returning moves because there are none more 
 favorable than the starting layout.
+
+7/11/13
+Found a formula for calculating a chess position on wikipedia.
+
+    f(P) = 200(K-K') + 9(Q-Q') + 5(R-R') + 3(B-B'+N-N') + (P-P') - 0.5(D-D'+S-S'+I-I') + 0.1(M-M') + ...
+
+    in which:
+
+    K, Q, R, B, N, P are the number of white kings, queens, rooks, bishops, knights and pawns on the board.
+    D, S, I are doubled, backward and isolated white pawns.
+    M represents white mobility (measured, say, as the number of legal moves available to White).[1]
+    
+Doubled pawns are pawns that share a column, backward pawns are pawns that can only move into attack, 
+isolated pawns have no pawn in the column on either side of them.
