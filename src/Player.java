@@ -105,23 +105,18 @@ public abstract class Player{
   }
    
   public boolean evaluateCheckMate(){
-    boolean checkMate = false;
-    boolean enemyFound = false;
-	//loop through each pieces moves, if a move goes to an enemy's position, remove that enemy from the list of vital enemies
-	for(ChessPiece piece : pieces){
-	  setVitalEnemies();  //set all enemies that can move to kings position
-	  for (Move move : piece.checkValidMoves() ){ //loop through moves to find one that lowers vital enemies count to zero
-		for (ChessPiece enemy : getVitalEnemies()){  
-		  if (enemy.getPosition() == move.getEndPosition()){  //if move  can remove an enemy
-		    checkMate = piece.testMove(move);//test to see if move will bring player out of check
-			enemyFound = true;	//	
-		  }  
-	    }
+    boolean checkMate = true;
+	if(vitalEnemies.size() == 0){
+	  checkMate = false;
+	}else{
+	
+	//loop through each piece, looking for a valid move
+	  for (ChessPiece piece : pieces){
+	    if(piece.checkValidMoves().size() > 0)
+	      checkMate = false;
 	  }
 	}
-	
-    if (!enemyFound && vitalEnemies.size() > 0) //if king is in check and no availble move can take out piece putting king in check 
-	  checkMate = true;
+ 
 	return checkMate;
   }
   
@@ -166,11 +161,14 @@ public abstract class Player{
 	  if(enemy.isActive()){
 	    score -= enemy.getValue() * 2;  
 	      if (enemy.isVulnerable(enemy.getPosition()).size() > 0){ 
-		    score += enemy.getValue();
+		    score += enemy.getValue() * 1.5;
 	      }
 	  }                                 
 
 	}
+	
+	
+	
 	return score;
   }
   
