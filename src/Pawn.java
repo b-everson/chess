@@ -56,13 +56,75 @@ public class Pawn extends ChessPiece{
 	return possibilities;
   }
   
+  //pawn's vulnerable positions are unique in that they differ from regular available moves
   public boolean move(BoardPosition position){
-    boolean moveTrue = super.move(position);
+    boolean moveTrue = super.move(position);  
 	if(moveTrue){
 	  firstMove = false;
-	  setVulnerablePositions();
+	  setVulnerablePositions();  
 	}
 	return moveTrue;
+  }
+  
+  public boolean isDoubled(){
+    boolean doubled = false;
+	int column = getPosition().getX();
+	for (int i = 0; i < Board.BOARD_HEIGHT; i++){
+	  BoardPosition nextPosition = gameBoard.getBoardPosition(column,i);
+	  if(nextPosition == this.getPosition()){
+	    continue;
+	  }else{
+	    if (nextPosition.getPiece() instanceof Pawn){
+          if(nextPosition.occupiedByFriendly(this)){
+		    doubled = true;
+		  }
+        }		
+	  }
+	}
+	return doubled;
+  }
+  
+  public boolean isBackward(){
+    boolean backward = false;
+	BoardPosition nextPosition = gameBoard.getBoardPosition(getPosition().getX(), getPosition().getY() + 1 * direction);
+	if(nextPosition != null){
+	  if(this.isVulnerable(nextPosition).size() > 0){
+	    backward = true;
+	  }
+	}
+	return backward;
+  }
+  
+  /*
+    if there are no friendly pawns on either column next to the pawn then it is
+	considered isolated
+  */
+  public boolean isIsolated(){
+    boolean isolated = true;
+	for(int i = 0; i < Board.BOARD_HEIGHT; i++){
+	  BoardPosition leftSide = gameBoard.getBoardPosition(getPosition().getX()-1,i);
+	  if(leftSide != null){  
+		if(leftSide.occupiedByFriendly(this)){
+	      if(leftSide.getPiece() instanceof Pawn){
+	        isolated = false;
+		    break;
+	      }
+	    }
+	  }	
+	}
+    
+	for(int j = 0; j < Board.BOARD_HEIGHT; j++){
+	  BoardPosition rightSide = gameBoard.getBoardPosition(getPosition().getX()+1,j);  
+	  if(rightSide != null){  
+		if(rightSide.occupiedByFriendly(this)){
+	      if(rightSide.getPiece() instanceof Pawn){
+		    isolated = false;
+		    break;
+		  }
+	    }
+	  }
+	}
+	return isolated;
   }
   
 }
