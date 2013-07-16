@@ -12,7 +12,12 @@ public class AIPlayer extends Player{
   
   public MoveEvaluation minimax(int depth,Player player,Player opponent){
     ArrayList<Move> validMoves = player.validMoves();
-	MoveEvaluation best = new MoveEvaluation(null,player);
+	MoveEvaluation best;
+    if(player == this){
+      best	= new MoveEvaluation(null,-1000);
+    }else{
+      best = new MoveEvaluation(null, 1000);
+    }	
 	if(depth == 0 || validMoves.size() == 0){
 	  return new MoveEvaluation(null, player);
 	}
@@ -23,16 +28,15 @@ public class AIPlayer extends Player{
 	  int score = nextEval.getScore();
 	  move.undo();
 	  if(player == this){
-	    if (best.getScore() < score){
+	    if (best.getScore() < score){     //returns moves with most favorable score for AIPlayer
 		  best = new MoveEvaluation(move,score);
 		}
 	  }else{
-	    if (best.getScore() > score ){
+	    if (best.getScore() > score ){     //returns moves with lowest favorable score to opponent
 		  best = new MoveEvaluation(move,score);
 		}
 	  }
 	}
-	
 	return best;
   }
   
