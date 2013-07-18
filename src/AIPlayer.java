@@ -19,7 +19,7 @@ public class AIPlayer extends Player{
       best = new MoveEvaluation(null, 1000);
     }	
 	if(depth == 0 || validMoves.size() == 0){
-	  return new MoveEvaluation(null, player);
+	  return new MoveEvaluation(null, this);  
 	}
 	
 	for (Move move : validMoves){  //for every move that is valid
