@@ -173,3 +173,26 @@ Initial thoughts on GUI are to use a JPanel using an 8x8 grid layout within the 
 border layout setting the board in the center, then to the south would be a JLabel for holding
 relevent messages. Error messages for invalid moves, letting the player know when the computer
 player is deciding it's move, etc. 
+
+ChessPiece class will include a reference to an ImageIcon using the path to the relevent image, 
+pulled in by the BoardPosition that contains it. The BoardPosition class will extend JButton,
+the Board will extend JPanel calling setLayout(new GridLayout(8,8)) within its initialization function.
+
+
+--Board class alterations --
+  -add setLayout(new GridLayout(8,8)) to intialize function
+  -loadPositions() needs to include logic for alternating red/black squares
+  -draw board needs to set each board position to display relevant icon instead of printing it's toString method
+
+--BoardPosition class alterations--
+  -Now extends JButton
+  -no need for contents string, icon is now what will be displayed 
+  -setPiece() needs to set icon to null when there is no incoming piece, otherwise set icon to 
+     incoming piece's icon
+  -clearPiece() should now set icon to null instead clearing contents string
+  -no need for toString()
+
+--ChessPiece class alterations--
+  -No longer have description string, just image icon reference
+  -must determine correct icon with owning Player (black/white) during instantiation
+  -won't need toString() or getCharater()
