@@ -167,3 +167,9 @@ Found a formula for calculating a chess position on wikipedia.
     
 Doubled pawns are pawns that share a column, backward pawns are pawns that can only move into attack, 
 isolated pawns have no pawn in the column on either side of them.
+
+7/21/13
+Initial thoughts on GUI are to use a JPanel using an 8x8 grid layout within the JFrame using a
+border layout setting the board in the center, then to the south would be a JLabel for holding
+relevent messages. Error messages for invalid moves, letting the player know when the computer
+player is deciding it's move, etc. 
