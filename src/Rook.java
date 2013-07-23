@@ -2,11 +2,15 @@ import java.util.ArrayList;
 public class Rook extends ChessPiece{
   private static final char ROOK_CHAR = 'r';
   private static final int ROOK_VALUE = 5;
+  private static final String ROOK_NAME = "rook";
   
   public Rook(Player pOwner, Board bOwner){
-    super(ROOK_CHAR,pOwner, bOwner, ROOK_VALUE);
+    super(ROOK_CHAR,pOwner, bOwner, ROOK_VALUE, ROOK_NAME);
   }
   
+  public String getType(){
+    return ROOK_NAME;
+  }
  
   public ArrayList<Move> checkMoveAvailable(){  
 	ArrayList<Move> possibilities = new ArrayList<Move>();

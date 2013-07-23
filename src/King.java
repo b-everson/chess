@@ -2,9 +2,10 @@ import java.util.ArrayList;
 public class King extends ChessPiece{
   private static final char KING_CHAR = 'K';
   private static final int KING_VALUE = 100;
+  private static final String KING_NAME = "king";
   
   public King(Player pOwner, Board bOwner){
-    super(KING_CHAR, pOwner, bOwner, KING_VALUE);
+    super(KING_CHAR, pOwner, bOwner, KING_VALUE, KING_NAME);
   }
   
   public ArrayList<Move> checkMoveAvailable(){

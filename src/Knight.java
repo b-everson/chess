@@ -2,9 +2,10 @@ import java.util.ArrayList;
 public class Knight extends ChessPiece{
   private static final char KNIGHT_CHAR = 'k';
   private static final int KNIGHT_VALUE = 3;
+  private static final String KNIGHT_NAME = "knight";
   
   public Knight(Player pOwner, Board bOwner){
-    super(KNIGHT_CHAR, pOwner, bOwner, KNIGHT_VALUE);
+    super(KNIGHT_CHAR, pOwner, bOwner, KNIGHT_VALUE, KNIGHT_NAME);
   }
   
   //need positions 1 up 2 left, 1 up 2 right, 2 up 1 left, 2 up 1 right, 1 down 2 left, 1 down 2 right, 2 down 1 left, 2 down 1 right
