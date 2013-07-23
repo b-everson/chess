@@ -196,3 +196,12 @@ the Board will extend JPanel calling setLayout(new GridLayout(8,8)) within its i
   -No longer have description string, just image icon reference
   -must determine correct icon with owning Player (black/white) during instantiation
   -won't need toString() or getCharater()
+
+--HumanPlayer class alterations--
+  -takeTurn() 
+
+
+7/22/13 
+  Added gui including board, board positions, and chess pieces with correct Image Icons
+    - 1 flaw, any movement made, including path finding algo movements, sets image icons
+       It looks pretty cool though 

@@ -22,6 +22,7 @@ public abstract class Player{
   private Pawn p8;
   private String playerDescription;
   protected ArrayList<ChessPiece> vitalEnemies;
+  private String playerName;
   
   public Board getBoard(){
     return this.board;
@@ -29,6 +30,10 @@ public abstract class Player{
   
   public String getDescription(){
     return playerDescription;
+  }
+  
+  public String getType(){
+    return playerName;
   }
   
   public ArrayList<ChessPiece> getPieces(){
@@ -39,8 +44,10 @@ public abstract class Player{
     this.board = owner;
 	if(player1){
 	  playerDescription = "(p1)";
+	  playerName = "white";
 	}else{
 	  playerDescription = "(p2)";
+	  playerName = "black";
 	}
 	r1 = new Rook(this, board);
 	r2 = new Rook(this, board);

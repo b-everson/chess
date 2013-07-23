@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import javax.swing.*;
+import java.awt.*;
 public class Board{
 
   private BoardPosition[][] gameBoard = new BoardPosition[8][8];
@@ -6,9 +8,16 @@ public class Board{
   public static final int BOARD_WIDTH = 7;
   private Player player1 = null;
   private Player player2 = null;
+  private JPanel panel;
 
+  public JPanel getPanel(){
+    return panel;
+  }
+  
   public void initialize(Player firstPlayer, Player secondPlayer){
-    player1 = firstPlayer;
+    panel = new JPanel();
+	panel.setLayout(new GridLayout(8,8));
+	player1 = firstPlayer;
 	player2 = secondPlayer;
 	loadPositions();
 	initializeBoard();
@@ -107,11 +116,26 @@ public class Board{
 	  return null;  //function returns null if not a valid BoardPosition
   }
   
+  //need to loop backwards through board positions to match up with draw function
   private void loadPositions(){
-    for(int xAxis = 0; xAxis <= Board.BOARD_WIDTH;xAxis++){
-	  for(int yAxis = 0; yAxis <= Board.BOARD_HEIGHT; yAxis++){
+    int counter = 0; 
+    for(int yAxis = gameBoard.length - 1;yAxis >= 0;yAxis--){
+	  for(int xAxis = 0; xAxis < gameBoard[yAxis].length;xAxis++){
 	    gameBoard[xAxis][yAxis] = new BoardPosition(xAxis,yAxis);
+		BoardPosition nextPosition = gameBoard[xAxis][yAxis];
+		JButton button = new JButton();
+		  
+		if(counter % 2 == 0){
+		  button.setBackground(Color.black);
+		}
+		else{
+		  button.setBackground(Color.red);
+		}
+		counter++;
+		nextPosition.setButton(button);
+		panel.add(nextPosition.getButton());
 	  }
+	  counter++;
 	}
   }
   

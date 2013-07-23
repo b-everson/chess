@@ -1,8 +1,18 @@
-public class BoardPosition{
+import javax.swing.JButton;
+public class BoardPosition {
   private int xCoord;
   private int yCoord;
   private ChessPiece currentPiece = null;
   private String contents = "       ";
+  private JButton button;
+  
+  public JButton getButton(){
+    return button;
+  }
+  
+  public void setButton(JButton button){
+    this.button = button;
+  }
   
   public BoardPosition(int x, int y){
     xCoord = x;
@@ -43,10 +53,14 @@ public class BoardPosition{
     if(currentPiece != null)
 	  currentPiece.setInactive();
 	currentPiece = piece;
-	if(currentPiece != null)
+	if(currentPiece != null){
 	  contents = currentPiece.toString();
-	else
+	  button.setIcon(currentPiece.getIcon());
+	}  
+	else{
 	  contents = "       ";
+	  button.setIcon(null);
+	}  
   }
   
   public void clearPiece(){

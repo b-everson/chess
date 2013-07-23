@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import javax.swing.*;
 public abstract class ChessPiece{
   private Player owner;
   protected Board gameBoard;
@@ -7,9 +8,15 @@ public abstract class ChessPiece{
   protected BoardPosition position = null;
   protected ArrayList<BoardPosition> vulnerablePositions;
   private int value;
+  private ImageIcon pieceIcon;
   
-  public ChessPiece(char symbol, Player pOwner, Board bOwner, int pieceValue){
-    pieceChar = symbol;
+  public ImageIcon getIcon(){
+    return pieceIcon;
+  }
+  
+  public ChessPiece(char symbol, Player pOwner, Board bOwner, int pieceValue, String type){
+    pieceIcon = new ImageIcon(".\\chesspieces\\" + pOwner.getType() + type + ".png");
+	pieceChar = symbol;
 	owner = pOwner;
 	playerInfo = pOwner.getDescription();
 	gameBoard = bOwner;
