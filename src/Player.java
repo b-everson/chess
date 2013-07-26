@@ -90,7 +90,7 @@ public abstract class Player{
   protected ChessPiece getPiece(int xPos, int yPos){
     ChessPiece returnPiece = null;
 	for(ChessPiece piece : pieces){
-	  if (piece.getPosition().getX() == xPos && piece.getPosition().getY() == yPos){
+	  if (piece.getPosition().getXCoord() == xPos && piece.getPosition().getYCoord() == yPos){
 	    returnPiece = piece;
 		break;
 	  }

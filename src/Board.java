@@ -62,8 +62,8 @@ public class Board{
     ArrayList<ChessPiece> playerPieces = player.getPieces();
 	for (ChessPiece piece: playerPieces){
 	  if(piece.getPosition() != null){
-	  int xLocation = piece.getPosition().getX();
-	  int yLocation = piece.getPosition().getY();
+	  int xLocation = piece.getPosition().getXCoord();
+	  int yLocation = piece.getPosition().getYCoord();
 	  gameBoard[xLocation][yLocation].setPiece(piece);
 	  gameBoard[xLocation][yLocation].update();
 	  }
@@ -125,17 +125,17 @@ public class Board{
 	  for(int xAxis = 0; xAxis < gameBoard[yAxis].length;xAxis++){
 	    gameBoard[xAxis][yAxis] = new BoardPosition(xAxis,yAxis);
 		BoardPosition nextPosition = gameBoard[xAxis][yAxis];
-		JButton button = new JButton();
+		//JButton button = new JButton();
 		  
 		if(counter % 2 == 0){
-		  button.setBackground(Color.black);
+		  nextPosition.setBackground(Color.black);
 		}
 		else{
-		  button.setBackground(Color.red);
+		  nextPosition.setBackground(Color.red);
 		}
 		counter++;
-		nextPosition.setButton(button);
-		panel.add(nextPosition.getButton());
+		//nextPosition.setButton(button);
+		panel.add(nextPosition);
 	  }
 	  counter++;
 	}

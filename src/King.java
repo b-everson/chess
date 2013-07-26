@@ -10,8 +10,8 @@ public class King extends ChessPiece{
   
   public ArrayList<Move> checkMoveAvailable(){
     ArrayList<Move> possibilities = new ArrayList<Move>();
-	int x = position.getX();
-	int y = position.getY();
+	int x = position.getXCoord();
+	int y = position.getYCoord();
 	BoardPosition[] positions = new BoardPosition[8];
 	positions[0] = gameBoard.getBoardPosition(x + 1, y);
 	positions[1] = gameBoard.getBoardPosition(x - 1, y);

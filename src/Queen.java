@@ -11,8 +11,8 @@ public class Queen extends ChessPiece{
  public ArrayList<Move> checkMoveAvailable(){  
 	ArrayList<Move> possibilities = new ArrayList<Move>();
 	//Add each available position extending x --            check position add empty, add enemy then break,   break on friendly
-	for(int x = position.getX() - 1; x >= 0; x--){
-	  BoardPosition checkPosition = gameBoard.getBoardPosition(x, position.getY());
+	for(int x = position.getXCoord() - 1; x >= 0; x--){
+	  BoardPosition checkPosition = gameBoard.getBoardPosition(x, position.getYCoord());
 	  if (!checkPosition.isOccupied()){
 	     possibilities.add(new Move(this, checkPosition));
 	  }else if (checkPosition.occupiedByEnemy(this)){
@@ -24,8 +24,8 @@ public class Queen extends ChessPiece{
 	}  
 	
 	//Add each available position extending x ++            check position add empty, add enemy then break,   break on friendly
-	for(int x = position.getX() + 1; x <= Board.BOARD_WIDTH; x++){
-	  BoardPosition checkPosition = gameBoard.getBoardPosition(x, position.getY());
+	for(int x = position.getXCoord() + 1; x <= Board.BOARD_WIDTH; x++){
+	  BoardPosition checkPosition = gameBoard.getBoardPosition(x, position.getYCoord());
 	  if (!checkPosition.isOccupied()){
 	     possibilities.add(new Move(this, checkPosition));
 	  }else if (checkPosition.occupiedByEnemy(this)){
@@ -37,8 +37,8 @@ public class Queen extends ChessPiece{
 	}  
 	
 		//Add each available position extending y --            check position add empty, add enemy then break,   break on friendly
-	for(int y = position.getY() - 1; y >= 0; y--){
-	  BoardPosition checkPosition = gameBoard.getBoardPosition(position.getX(), y);
+	for(int y = position.getYCoord() - 1; y >= 0; y--){
+	  BoardPosition checkPosition = gameBoard.getBoardPosition(position.getXCoord(), y);
 	  if (!checkPosition.isOccupied()){
 	     possibilities.add(new Move(this, checkPosition));
 	  }else if (checkPosition.occupiedByEnemy(this)){
@@ -50,8 +50,8 @@ public class Queen extends ChessPiece{
 	}  
 	
 	//Add each available position extending y ++            check position add empty, add enemy then break,   break on friendly
-	for(int y = position.getY() + 1; y <= Board.BOARD_HEIGHT; y++){
-	  BoardPosition checkPosition = gameBoard.getBoardPosition(position.getX(), y);
+	for(int y = position.getYCoord() + 1; y <= Board.BOARD_HEIGHT; y++){
+	  BoardPosition checkPosition = gameBoard.getBoardPosition(position.getXCoord(), y);
 	  if (!checkPosition.isOccupied()){
 	     possibilities.add(new Move(this, checkPosition));
 	  }else if (checkPosition.occupiedByEnemy(this)){
@@ -66,8 +66,8 @@ public class Queen extends ChessPiece{
 	//Add each available position extending y++, x++  check position add empty, enemy then break, break on friendly
 	//Do this until position isn't valid board position
 	boolean done = false;
-	int x = position.getX() + 1;
-	int y = position.getY() + 1;
+	int x = position.getXCoord() + 1;
+	int y = position.getYCoord() + 1;
 	do{
 	  BoardPosition checkPosition; 
 	  if( x > Board.BOARD_WIDTH || y > Board.BOARD_HEIGHT )
@@ -89,8 +89,8 @@ public class Queen extends ChessPiece{
 	//Add each available position extending y++, x--  check position add empty, enemy then break, break on friendly
 	//Do this until position isn't valid board position
 	done = false;
-	x = position.getX() - 1;
-	y = position.getY() + 1;
+	x = position.getXCoord() - 1;
+	y = position.getYCoord() + 1;
 	do{
 	  BoardPosition checkPosition; 
 	  if( x < 0 || y > Board.BOARD_HEIGHT )
@@ -112,8 +112,8 @@ public class Queen extends ChessPiece{
 	//Add each available position extending y--, x--  check position add empty, enemy then break, break on friendly
 	//Do this until position isn't valid board position
 	done = false;
-	x = position.getX() - 1;
-	y = position.getY() - 1;
+	x = position.getXCoord() - 1;
+	y = position.getYCoord() - 1;
 	do{
 	  BoardPosition checkPosition; 
 	  if( x < 0 || y < 0 )
@@ -133,8 +133,8 @@ public class Queen extends ChessPiece{
 	} while (!done);//Add each available position extending y--, x++  check position add empty, enemy then break, break on friendly
 	//Do this until position isn't valid board position
 	done = false;
-	x = position.getX() + 1;
-	y = position.getY() - 1;
+	x = position.getXCoord() + 1;
+	y = position.getYCoord() - 1;
 	do{
 	  BoardPosition checkPosition; 
 	  if( y < 0 || x > Board.BOARD_WIDTH )

@@ -66,7 +66,7 @@ public class HumanPlayer extends Player{
 	
 	for (ChessPiece piece: pieces){
 	  if(piece.getPosition() != null){  
-		if(piece.getPosition().getX() == x && piece.getPosition().getY() == y){
+		if(piece.getPosition().getXCoord() == x && piece.getPosition().getYCoord() == y){
 	      selectedPiece = piece;
 	    }
 	  }	

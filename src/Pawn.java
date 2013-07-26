@@ -12,11 +12,11 @@ public class Pawn extends ChessPiece{
   
   public void setVulnerablePositions(){
     ArrayList<BoardPosition> possibilities =  new ArrayList<BoardPosition>();
-	BoardPosition pos1 = gameBoard.getBoardPosition(position.getX() + 1, position.getY() + 1 * direction); //check 1 position forward based on direction, one to right on board orientation
+	BoardPosition pos1 = gameBoard.getBoardPosition(position.getXCoord() + 1, position.getYCoord() + 1 * direction); //check 1 position forward based on direction, one to right on board orientation
     if(pos1 != null){ 	
 	  possibilities.add(pos1);
 	}  
-	BoardPosition pos2 = gameBoard.getBoardPosition(position.getX() -1, position.getY() + 1 * direction); //check 1 position forward based on direction, one to left on board orientation
+	BoardPosition pos2 = gameBoard.getBoardPosition(position.getXCoord() -1, position.getYCoord() + 1 * direction); //check 1 position forward based on direction, one to left on board orientation
 	if(pos2 != null){
 	  possibilities.add(pos2);
     }	
@@ -32,24 +32,24 @@ public class Pawn extends ChessPiece{
   
   public ArrayList<Move> checkMoveAvailable(){   //get list of board positions 
 	ArrayList<Move> possibilities = new ArrayList<Move>();
-    BoardPosition pos1 = gameBoard.getBoardPosition(position.getX(),position.getY() + 1 * direction); //check one position forward of pawn based on direction
+    BoardPosition pos1 = gameBoard.getBoardPosition(position.getXCoord(),position.getYCoord() + 1 * direction); //check one position forward of pawn based on direction
     if(pos1 != null){	//if position is not within array values of board positions gameBoard.getBoardPosition returns null     
 	if (!pos1.isOccupied()){ //only add this position if space 1 position forward is empty
 	    possibilities.add(new Move(this,pos1));
 	  }
 	}  
-	BoardPosition pos2 = gameBoard.getBoardPosition(position.getX(), position.getY() + 2 * direction); //check 2 positions forward of pawn based on position if pawn's first move
+	BoardPosition pos2 = gameBoard.getBoardPosition(position.getXCoord(), position.getYCoord() + 2 * direction); //check 2 positions forward of pawn based on position if pawn's first move
 	if(pos2 != null){  
 	  if(firstMove && !pos2.isOccupied()){  // only add this position if space 2 positions forward is empty and it is pawn's first move
 		possibilities.add(new Move(this, pos2));
 	  }
 	}
-    BoardPosition pos3 = gameBoard.getBoardPosition(position.getX() + 1, position.getY() + 1 * direction); //check 1 position forward based on direction, one to right on board orientation
+    BoardPosition pos3 = gameBoard.getBoardPosition(position.getXCoord() + 1, position.getYCoord() + 1 * direction); //check 1 position forward based on direction, one to right on board orientation
     if(pos3 != null){ 	
 	  if(pos3.occupiedByEnemy(this)) //only add if this position occupied by enemy
 	    possibilities.add(new Move(this, pos3));
 	}  
-	BoardPosition pos4 = gameBoard.getBoardPosition(position.getX() -1, position.getY() + 1 * direction); //check 1 position forward based on direction, one to left on board orientation
+	BoardPosition pos4 = gameBoard.getBoardPosition(position.getXCoord() -1, position.getYCoord() + 1 * direction); //check 1 position forward based on direction, one to left on board orientation
 	if(pos4 != null){
 	  if(pos4.occupiedByEnemy(this)) //only add if this position occupied by enemy
 	    possibilities.add(new Move(this,pos4));
@@ -69,7 +69,7 @@ public class Pawn extends ChessPiece{
   
   public boolean isDoubled(){
     boolean doubled = false;
-	int column = getPosition().getX();
+	int column = getPosition().getXCoord();
 	for (int i = 0; i < Board.BOARD_HEIGHT; i++){
 	  BoardPosition nextPosition = gameBoard.getBoardPosition(column,i);
 	  if(nextPosition == this.getPosition()){
@@ -87,7 +87,7 @@ public class Pawn extends ChessPiece{
   
   public boolean isBackward(){
     boolean backward = false;
-	BoardPosition nextPosition = gameBoard.getBoardPosition(getPosition().getX(), getPosition().getY() + 1 * direction);
+	BoardPosition nextPosition = gameBoard.getBoardPosition(getPosition().getXCoord(), getPosition().getYCoord() + 1 * direction);
 	if(nextPosition != null){
 	  if(this.isVulnerable(nextPosition).size() > 0){
 	    backward = true;
@@ -103,7 +103,7 @@ public class Pawn extends ChessPiece{
   public boolean isIsolated(){
     boolean isolated = true;
 	for(int i = 0; i < Board.BOARD_HEIGHT; i++){
-	  BoardPosition leftSide = gameBoard.getBoardPosition(getPosition().getX()-1,i);
+	  BoardPosition leftSide = gameBoard.getBoardPosition(getPosition().getXCoord()-1,i);
 	  if(leftSide != null){  
 		if(leftSide.occupiedByFriendly(this)){
 	      if(leftSide.getPiece() instanceof Pawn){
@@ -115,7 +115,7 @@ public class Pawn extends ChessPiece{
 	}
     
 	for(int j = 0; j < Board.BOARD_HEIGHT; j++){
-	  BoardPosition rightSide = gameBoard.getBoardPosition(getPosition().getX()+1,j);  
+	  BoardPosition rightSide = gameBoard.getBoardPosition(getPosition().getXCoord()+1,j);  
 	  if(rightSide != null){  
 		if(rightSide.occupiedByFriendly(this)){
 	      if(rightSide.getPiece() instanceof Pawn){

@@ -13,8 +13,8 @@ public class Bishop extends ChessPiece{
 	//Add each available position extending y++, x++  check position add empty, enemy then break, break on friendly
 	//Do this until position isn't valid board position
 	boolean done = false;
-	int x = position.getX() + 1;
-	int y = position.getY() + 1;
+	int x = position.getXCoord() + 1;
+	int y = position.getYCoord() + 1;
 	do{
 	  BoardPosition checkPosition; 
 	  if( x > Board.BOARD_WIDTH || y > Board.BOARD_HEIGHT )
@@ -36,8 +36,8 @@ public class Bishop extends ChessPiece{
 	//Add each available position extending y++, x--  check position add empty, enemy then break, break on friendly
 	//Do this until position isn't valid board position
 	done = false;
-	x = position.getX() - 1;
-	y = position.getY() + 1;
+	x = position.getXCoord() - 1;
+	y = position.getYCoord() + 1;
 	do{
 	  BoardPosition checkPosition; 
 	  if( x < 0 || y > Board.BOARD_HEIGHT )
@@ -59,8 +59,8 @@ public class Bishop extends ChessPiece{
 	//Add each available position extending y--, x--  check position add empty, enemy then break, break on friendly
 	//Do this until position isn't valid board position
 	done = false;
-	x = position.getX() - 1;
-	y = position.getY() - 1;
+	x = position.getXCoord() - 1;
+	y = position.getYCoord() - 1;
 	do{
 	  BoardPosition checkPosition; 
 	  if( x < 0 || y < 0 )
@@ -80,8 +80,8 @@ public class Bishop extends ChessPiece{
 	} while (!done);//Add each available position extending y--, x++  check position add empty, enemy then break, break on friendly
 	//Do this until position isn't valid board position
 	done = false;
-	x = position.getX() + 1;
-	y = position.getY() - 1;
+	x = position.getXCoord() + 1;
+	y = position.getYCoord() - 1;
 	do{
 	  BoardPosition checkPosition; 
 	  if( y < 0 || x > Board.BOARD_WIDTH )

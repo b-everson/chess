@@ -1,5 +1,5 @@
 import javax.swing.JButton;
-public class BoardPosition {
+public class BoardPosition extends JButton {
   private int xCoord;
   private int yCoord;
   private ChessPiece currentPiece = null;
@@ -19,11 +19,11 @@ public class BoardPosition {
 	yCoord = y;
   }
   
-  public int getX(){
+  public int getXCoord(){
     return xCoord;
   }
   
-  public int getY(){
+  public int getYCoord(){
     return yCoord;
   }
   
@@ -73,15 +73,16 @@ public class BoardPosition {
   }
  
   public String toString(){
+  
     return contents;
   }
   
   public void update(){
     if(this.currentPiece == null){
-	  this.button.setIcon(null);
+	  this.setIcon(null);
 	}
 	else{
-	  this.button.setIcon(currentPiece.getIcon());
+	  this.setIcon(currentPiece.getIcon());
 	}
   }
   
