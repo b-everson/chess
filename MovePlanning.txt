@@ -37,9 +37,5 @@ each to create arraylist of boardPositions  --changed
 - Player.evaluateCheckmate()
 
 
-
-
-
-
 --need to check ChessPiece line 32 for issues related to removing element within
 loop
