@@ -205,3 +205,8 @@ the Board will extend JPanel calling setLayout(new GridLayout(8,8)) within its i
   Added gui including board, board positions, and chess pieces with correct Image Icons
     - 1 flaw, any movement made, including path finding algo movements, sets image icons
        It looks pretty cool though 
+
+7/25/13
+  Gave some thought to previous bug necessitating change of BoardPosition extending JButton to owning one. JButton
+has getX and getY functions already, so positioning but was due to that, fixed that and now can work on how to 
+implement moves for player.
