@@ -55,11 +55,11 @@ public class BoardPosition {
 	currentPiece = piece;
 	if(currentPiece != null){
 	  contents = currentPiece.toString();
-	  button.setIcon(currentPiece.getIcon());
+	  //button.setIcon(currentPiece.getIcon());
 	}  
 	else{
 	  contents = "       ";
-	  button.setIcon(null);
+	  //button.setIcon(null);
 	}  
   }
   
@@ -74,6 +74,15 @@ public class BoardPosition {
  
   public String toString(){
     return contents;
+  }
+  
+  public void update(){
+    if(this.currentPiece == null){
+	  this.button.setIcon(null);
+	}
+	else{
+	  this.button.setIcon(currentPiece.getIcon());
+	}
   }
   
 }

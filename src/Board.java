@@ -53,6 +53,7 @@ public class Board{
     for (int i = 0; i < gameBoard.length;i++){
 	  for (int j = 0; j < gameBoard[i].length;j++){
 	    gameBoard[i][j].clearPiece();
+		gameBoard[i][j].update();
 	  }
 	}
   }
@@ -64,6 +65,7 @@ public class Board{
 	  int xLocation = piece.getPosition().getX();
 	  int yLocation = piece.getPosition().getY();
 	  gameBoard[xLocation][yLocation].setPiece(piece);
+	  gameBoard[xLocation][yLocation].update();
 	  }
 	}
   }
