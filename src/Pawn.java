@@ -40,7 +40,7 @@ public class Pawn extends ChessPiece{
 	}  
 	BoardPosition pos2 = gameBoard.getBoardPosition(position.getXCoord(), position.getYCoord() + 2 * direction); //check 2 positions forward of pawn based on position if pawn's first move
 	if(pos2 != null){  
-	  if(firstMove && !pos2.isOccupied()){  // only add this position if space 2 positions forward is empty and it is pawn's first move
+	  if(firstMove && !pos2.isOccupied() && !pos1.isOccupied()){  // only add this position if space 2 positions forward is empty and it is pawn's first move
 		possibilities.add(new Move(this, pos2));
 	  }
 	}
