@@ -4,15 +4,6 @@ public class BoardPosition extends JButton {
   private int yCoord;
   private ChessPiece currentPiece = null;
   private String contents = "       ";
-  private JButton button;
-  
-  public JButton getButton(){
-    return button;
-  }
-  
-  public void setButton(JButton button){
-    this.button = button;
-  }
   
   public BoardPosition(int x, int y){
     xCoord = x;
