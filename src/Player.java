@@ -43,10 +43,10 @@ public abstract class Player{
   public Player(Board owner){
     this.board = owner;
 	if(player1){
-	  playerDescription = "(p1)";
+	  playerDescription = "Player 1";
 	  playerName = "white";
 	}else{
-	  playerDescription = "(p2)";
+	  playerDescription = "Player 2";
 	  playerName = "black";
 	}
 	r1 = new Rook(this, board);
