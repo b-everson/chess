@@ -25,7 +25,7 @@ public class Pawn extends ChessPiece{
   
   public Pawn(Player pOwner, Board bOwner){
     super(PAWN_CHAR, pOwner, bOwner, PAWN_VALUE, PAWN_NAME);
-	if(pOwner.getDescription().equals("(p1)")){
+	if(pOwner.getDescription().equals("Player 1")){
 	  direction = 1;
 	}
   }
