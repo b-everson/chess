@@ -46,4 +46,14 @@ public class Move{
 	  endingPiece.setPosition(endingPosition);
 	}  
   }
+  
+  //want to return Player 1 or Player 2 moves (piece name) from (position x coord,
+  //position y coord) to (position x coord, position y coord)
+  public String toString(){
+	String player = startingPosition.getPiece().getOwner().getDescription();
+	String pieceName = startingPosition.getPiece().getType();
+	String startingCoords = "(" + (startingPosition.getXCoord() + 1) + ", " + (startingPosition.getYCoord() + 1) + ")";
+	String endingCoords = "(" + (endingPosition.getXCoord() + 1) + ", " + (endingPosition.getYCoord() + 1) + ")";
+	return player + " moves " + pieceName + " from " + startingCoords + " to " + endingCoords;
+  }
 }
