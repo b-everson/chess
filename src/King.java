@@ -33,7 +33,6 @@ public class King extends ChessPiece{
   
   public boolean move(BoardPosition position){
     if(isVulnerable(position).size() > 0){
-	  System.out.println("Cannot move your king into check.");
 	  Game.setMessage("Cannot move your king into check.");
 	  return false;
 	}  
