@@ -41,9 +41,12 @@ public class AIPlayer extends Player{
   }
   
   public void takeTurn(){
-    Move move = bestMove();
+    Game.setMessage("Computer player determining move.");
+	getBoard().enabled(false);
+	Move move = bestMove();
 
 	move.getStartPiece().move(move.getEndPosition());
-	
+	getBoard().enabled(true);
+	getBoard().toggleActivePlayer();
   }
 }

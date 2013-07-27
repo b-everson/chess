@@ -210,3 +210,7 @@ the Board will extend JPanel calling setLayout(new GridLayout(8,8)) within its i
   Gave some thought to previous bug necessitating change of BoardPosition extending JButton to owning one. JButton
 has getX and getY functions already, so positioning but was due to that, fixed that and now can work on how to 
 implement moves for player.
+
+So to get moves for player need to select a position based on the piece clicked, the only positions that the player should be able to 
+select are those of the player who's turn it currently is. The second selected positions must come from an available move. 
+
