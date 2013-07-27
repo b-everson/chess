@@ -11,8 +11,9 @@ public class Game{
   public static void main(String[] args){
 	boolean playing = true;
 	JFrame frame = new JFrame("Chess");	
+	
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	message = new JLabel("");
+	message = new JLabel("Welcome");
 	Board chessBoard = new Board();
 	HumanPlayer testPlayer1 = new HumanPlayer(chessBoard);
 	AIPlayer testPlayer2 = new AIPlayer(chessBoard);
@@ -32,6 +33,7 @@ public class Game{
 	frame.pack();
 	frame.setMinimumSize(new Dimension(660,500));
 	frame.setVisible(true);
+	frame.setLocationRelativeTo(null);
 	do{
 	  nextPlayer.takeTurn();
 	  chessBoard.drawBoard();
