@@ -1,12 +1,35 @@
 import java.util.Scanner;
-public class HumanPlayer extends Player{
+import java.awt.event.*;
+public class HumanPlayer extends Player implements ActionListener{
   private static Scanner input = new Scanner(System.in);
-  //protected ArrayList<ChessPiece> pieces
+  private ChessPiece selectedPiece;
+  private BoardPosition selectedMovePosition;
+  
   
   public HumanPlayer(Board board){
     super(board);
   }
   
+  
+  public void takeTurn(){
+    boolean acceptedMove = false;
+    do{
+	 selectedPiece = null;
+	 selectedMovePosition = null;
+	  do{
+	  
+	  } while (selectedPiece == null);
+	  do{
+	  
+	  } while (selectedMovePosition == null);
+	  
+	  acceptedMove = movePiece(selectedPiece,selectedMovePosition);
+	} while (!acceptedMove); 
+    getBoard().getOtherPlayer(this).evaluateCheck();
+	getBoard().toggleActivePlayer();	
+  }
+  
+  /*  
   public void takeTurn(){
     ChessPiece chosenPiece = null;
 	boolean acceptedMove = false;
@@ -22,7 +45,8 @@ public class HumanPlayer extends Player{
 	  acceptedMove = movePiece(chosenPiece,xPos,yPos);  //unacceptable move, try turn again
 	}while (!acceptedMove);
 	getBoard().getOtherPlayer(this).evaluateCheck();
-  }
+	getBoard().toggleActivePlayer();
+  }*/
   
   private int selectPosition(char axis){
     int position = -1;
@@ -41,6 +65,14 @@ public class HumanPlayer extends Player{
 	  }
 	}while(position > upperLimit || position < 0);
 	return position;
+  }
+  
+  private void selectPiece(BoardPosition position){
+    selectedPiece = position.getPiece();
+  }
+  
+  private void selectMovePosition(BoardPosition position){
+     selectedMovePosition = position;
   }
   
   private ChessPiece selectPiece(){
@@ -74,11 +106,32 @@ public class HumanPlayer extends Player{
 	return selectedPiece;
   }//selectPiece()
   
+  public boolean movePiece(ChessPiece piece, BoardPosition position){
+    return piece.move(position);
+  }
+  
   public boolean movePiece(ChessPiece piece, int x, int y){   
 	boolean moved = true;
 	BoardPosition movePosition = getBoard().getBoardPosition(x,y);
 	if (!piece.move(movePosition))
 	  moved = false;
 	return moved;
+  }
+  
+  //select piece, select place to move, if invalid piece try again, if invalid move reset
+  public void actionPerformed(ActionEvent e){
+    BoardPosition position = (BoardPosition)(e.getSource());
+	if(selectedPiece == null){
+	  if(position.getPiece() != null){
+	    if(position.getPiece().getOwner() == this){
+	      selectPiece(position);
+		  Game.setMessage("Piece selected");
+	    }	
+	  }	
+	}else if (selectedMovePosition == null){
+	  selectMovePosition(position);
+	  Game.setMessage("Piece move selected.");
+	}
+	
   }
 }

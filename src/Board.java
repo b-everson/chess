@@ -9,9 +9,26 @@ public class Board{
   private Player player1 = null;
   private Player player2 = null;
   private JPanel panel;
+  private Player activePlayer;
 
   public JPanel getPanel(){
     return panel;
+  }
+  
+  public void enabled(boolean enable){
+    for (int i = 0; i <= BOARD_HEIGHT; i++){
+	  for (int j = 0; j <= BOARD_WIDTH; j++){
+	    gameBoard[i][j].setEnabled(enable);
+	  }
+	}
+  }
+  
+  public Player getActivePlayer(){
+    return activePlayer;
+  }
+  
+  public void toggleActivePlayer(){
+    activePlayer = getOtherPlayer(activePlayer);
   }
   
   public void initialize(Player firstPlayer, Player secondPlayer){
@@ -21,6 +38,7 @@ public class Board{
 	player2 = secondPlayer;
 	loadPositions();
 	initializeBoard();
+	activePlayer = player1;
   }
   
   public void update(){
@@ -40,6 +58,7 @@ public class Board{
     clearBoard();
 	addPiecesTest();
 	//loop through x from top down, print y values 
+	Game.setMessage("Bacon");
 	for(int yPos = gameBoard.length - 1;yPos >= 0;yPos--){
 	  for(int xPos = 0; xPos < gameBoard[yPos].length;xPos++){
 	    System.out.print(gameBoard[xPos][yPos]);
@@ -125,8 +144,8 @@ public class Board{
 	  for(int xAxis = 0; xAxis < gameBoard[yAxis].length;xAxis++){
 	    gameBoard[xAxis][yAxis] = new BoardPosition(xAxis,yAxis);
 		BoardPosition nextPosition = gameBoard[xAxis][yAxis];
-		//JButton button = new JButton();
-		  
+		nextPosition.addActionListener((HumanPlayer)player1);
+		//JButton button = new JButton();		  
 		if(counter % 2 == 0){
 		  nextPosition.setBackground(Color.black);
 		}

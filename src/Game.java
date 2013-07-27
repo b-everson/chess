@@ -1,10 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
 public class Game{
+
+  private static JLabel message;
+  
+  public static void setMessage(String text){
+    message.setText(text);
+  }
+
   public static void main(String[] args){
 	boolean playing = true;
 	JFrame frame = new JFrame("Chess");	
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	message = new JLabel("");
 	Board chessBoard = new Board();
 	HumanPlayer testPlayer1 = new HumanPlayer(chessBoard);
 	AIPlayer testPlayer2 = new AIPlayer(chessBoard);
@@ -18,20 +26,21 @@ public class Game{
 	parent.setLayout(new BorderLayout());
 	p2.add(chessBoard.getPanel());
 	parent.add(p2, BorderLayout.CENTER);
-	parent.add(new JLabel("Messages Go Here"), BorderLayout.SOUTH);
+	
+	parent.add(message, BorderLayout.SOUTH);
 	frame.add(parent);
 	frame.pack();
 	frame.setMinimumSize(new Dimension(660,500));
 	frame.setVisible(true);
 	do{
-	nextPlayer.takeTurn();
-	chessBoard.drawBoard();
-	if (nextPlayer == testPlayer1){
-	  nextPlayer = testPlayer2;
-	}else{
-	  nextPlayer = testPlayer1;
-	}
-	checkMate = nextPlayer.evaluateCheckMate();
+	  nextPlayer.takeTurn();
+	  chessBoard.drawBoard();
+	  if (nextPlayer == testPlayer1){
+	    nextPlayer = testPlayer2;
+	  }else{
+	    nextPlayer = testPlayer1;
+	  }
+	  checkMate = nextPlayer.evaluateCheckMate();
 	} while (!checkMate);
 	String winner;
 	String loser;
