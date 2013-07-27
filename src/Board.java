@@ -56,16 +56,7 @@ public class Board{
   //using array of characters
   public void drawBoard(){
     clearBoard();
-	addPiecesTest();
-	//loop through x from top down, print y values 
-	Game.setMessage("Bacon");
-	for(int yPos = gameBoard.length - 1;yPos >= 0;yPos--){
-	  for(int xPos = 0; xPos < gameBoard[yPos].length;xPos++){
-	    System.out.print(gameBoard[xPos][yPos]);
-	  }
-	  System.out.println("    " + (yPos + 1));
-	}
-	System.out.println("   1      2      3      4      5      6      7      8  ");
+	addPieces();
   }
   
   private void clearBoard(){
@@ -77,7 +68,7 @@ public class Board{
 	}
   }
   
-  private void addPiecesTest(Player player){
+  private void addPieces(Player player){
     ArrayList<ChessPiece> playerPieces = player.getPieces();
 	for (ChessPiece piece: playerPieces){
 	  if(piece.getPosition() != null){
@@ -89,9 +80,9 @@ public class Board{
 	}
   }
   
-  private void addPiecesTest(){
-	addPiecesTest(player1);
-	addPiecesTest(player2);
+  private void addPieces(){
+	addPieces(player1);
+	addPieces(player2);
   }
   
   public void initializeBoard(){
