@@ -9,13 +9,19 @@ public abstract class ChessPiece{
   protected ArrayList<BoardPosition> vulnerablePositions;
   private int value;
   private ImageIcon pieceIcon;
+  private String type;
   
   public ImageIcon getIcon(){
     return pieceIcon;
   }
   
+  public String getType(){
+    return type;
+  }
+  
   public ChessPiece(char symbol, Player pOwner, Board bOwner, int pieceValue, String type){
     pieceIcon = new ImageIcon(".\\chesspieces\\" + pOwner.getType() + type + ".png");
+	this.type = type;
 	pieceChar = symbol;
 	owner = pOwner;
 	playerInfo = pOwner.getDescription();
@@ -96,10 +102,12 @@ public abstract class ChessPiece{
 
 	if(canMove){
 	  Move myMove = new Move(this, position);
-	  myMove.perform();	  
+	  Game.setMessage(myMove.toString());
+	  myMove.perform();	 
+      //Game.setMessage(myMove.toString());	  
 	}  
 	else
-	  System.out.println(message);
+	  Game.setMessage(message);
 	return canMove;
   }
   
