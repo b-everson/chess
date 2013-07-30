@@ -2,7 +2,7 @@ import java.util.ArrayList;
 public class AIPlayer extends Player{
   
   public Move bestMove(){
-    MoveEvaluation move = minimax(3, this, getBoard().getOtherPlayer(this));
+    MoveEvaluation move = negMax(3, this, getBoard().getOtherPlayer(this));
 	return move.getMove();
   }
   
@@ -13,7 +13,7 @@ public class AIPlayer extends Player{
   public MoveEvaluation minimax(int depth,Player player,Player opponent){
     ArrayList<Move> validMoves = player.validMoves();
 	MoveEvaluation best;
-    if(player == this){
+	 if(player == this){
       best	= new MoveEvaluation(null,-1000);
     }else{
       best = new MoveEvaluation(null, 1000);
@@ -35,6 +35,25 @@ public class AIPlayer extends Player{
 	    if (best.getScore() > score ){     //returns moves with lowest favorable score to opponent
 		  best = new MoveEvaluation(move,score);
 		}
+	  }
+	}
+	return best;
+  }
+  
+  public MoveEvaluation negMax(int depth,Player player,Player opponent){
+    ArrayList<Move> validMoves = player.validMoves();
+	MoveEvaluation best = new MoveEvaluation(null,-1000);  //best starts out at minimum
+	if(depth == 0 || validMoves.size() == 0){
+	  return new MoveEvaluation(null, player);  //player evaluates board (opponent for odd ply, player for even)
+	}
+	
+	for (Move move : validMoves){  //for every move that is valid
+	  move.perform();
+	  MoveEvaluation nextEval = negMax(depth - 1, opponent, player);
+	  int score = -nextEval.getScore();
+	  move.undo();
+	  if(score > best.getScore()){
+	    best = new MoveEvaluation(move, score);
 	  }
 	}
 	return best;
