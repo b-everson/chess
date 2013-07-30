@@ -158,50 +158,50 @@ public abstract class Player{
 	for (ChessPiece piece : pieces){
 	  if (piece.isActive()){
 	    playersMoves += piece.checkValidMoves().size();
-	    score += piece.getValue() * 2;
+	    score += piece.getValue() * 20;
 	/*	if(piece.isVulnerable(piece.getPosition()).size() > 0){
 		  score -= piece.getValue() * 1.5;
 		}*/
 		if(piece instanceof Pawn){
 		  if(((Pawn)piece).isDoubled()){
-		    score -= 1;
+		    score -= 10;
 		  }
 		  if(((Pawn)piece).isBackward()){
-		    score -= 1;
+		    score -= 10;
 		  }
 		  if(((Pawn)piece).isIsolated()){
-		    score -= 1;
+		    score -= 10;
 		  }
 		}
 	  }
 	}
 	
-	score += playersMoves * .2;
+	score += playersMoves * 2;
 	//doubling value of current pieces creates higher value for active pieces than vulnerable pieces
 	//this is so that putting pieces under attack is valued, but not as much as actually removing them.
 	int enemysMoves = 0;
 	for (ChessPiece enemy : board.getOtherPlayer(this).getPieces()){
 	  if(enemy.isActive()){
 	    enemysMoves += enemy.checkValidMoves().size();
-	    score -= enemy.getValue() * 2;  
+	    score -= enemy.getValue() * 20;  
 	/*      if (enemy.isVulnerable(enemy.getPosition()).size() > 0){ 
 		    score += enemy.getValue() * 1.5;
 	      }*/
 		  if(enemy instanceof Pawn){
 		    if(((Pawn)enemy).isDoubled()){
-		      score -= 1;
+		      score += 10;
 		    }
 		    if(((Pawn)enemy).isBackward()){
-		      score -= 1;
+		      score += 10;
 		    }
 		    if(((Pawn)enemy).isIsolated()){
-		      score -= 1;
+		      score += 10;
 		    }
 		  }
 	  }                                 
 	}
 	
-	score -= enemysMoves * .2;
+	score -= enemysMoves * 2;
 	
 	return (int)score;
   }
