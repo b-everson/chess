@@ -214,3 +214,16 @@ implement moves for player.
 So to get moves for player need to select a position based on the piece clicked, the only positions that the player should be able to 
 select are those of the player who's turn it currently is. The second selected positions must come from an available move. 
 
+8/1/13
+Added boolean for stalemate to player,
+added Random object to Game for determining AIPlayer's moves,
+added selectMove function to AIPlayer
+Castling is permissible if and only if all of the following conditions hold (Schiller 2001:19):
+
+    1.The king has not previously moved.
+    2.The chosen rook has not previously moved.
+    3.There are no pieces between the king and the chosen rook.
+    4.The king is not currently in check.
+    5.The king does not pass through a square that is under attack by an enemy piece.[2]
+    6.The king does not end up in check (true of any legal move).
+    7.The king and the chosen rook are on the first rank of the player (rank 1 for White, rank 8 for Black
