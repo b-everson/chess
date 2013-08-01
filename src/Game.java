@@ -1,27 +1,32 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 public class Game{
 
   private static JLabel message;
+  public static Random random;
   
   public static void setMessage(String text){
     message.setText(text);
   }
 
   public static void main(String[] args){
+	random = new Random();
 	boolean playing = true;
 	JFrame frame = new JFrame("Chess");	
 	
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	message = new JLabel("Welcome");
 	Board chessBoard = new Board();
-	HumanPlayer testPlayer1 = new HumanPlayer(chessBoard);
+	AIPlayer testPlayer1 = new AIPlayer(chessBoard);
+	//HumanPlayer testPlayer1 = new HumanPlayer(chessBoard);
 	AIPlayer testPlayer2 = new AIPlayer(chessBoard);
 	//HumanPlayer testPlayer2 = new HumanPlayer(chessBoard);
 	chessBoard.initialize((Player)testPlayer1,(Player)testPlayer2);
 	chessBoard.drawBoard();
 	Player nextPlayer = testPlayer1;
 	boolean checkMate = false;
+	boolean staleMate = false;
 	JPanel parent = new JPanel();
 	JPanel p2 = new JPanel();
 	parent.setLayout(new BorderLayout());
@@ -43,7 +48,8 @@ public class Game{
 	    nextPlayer = testPlayer1;
 	  }
 	  checkMate = nextPlayer.evaluateCheckMate();
-	} while (!checkMate);
+	  staleMate = nextPlayer.evaluateStaleMate();
+	} while (!checkMate && !staleMate);
 	String winner;
 	String loser;
 	if(nextPlayer == testPlayer1){
@@ -53,6 +59,10 @@ public class Game{
 	  winner = "Player 1";
 	  loser = "Player 2";
 	}
-	System.out.println("Checkmate " + loser + ", Congratulations " + winner);
+	if (checkMate){
+	  setMessage("Checkmate " + loser + ", Congratulations " + winner);
+	}else{
+      setMessage("Stalemate " + loser + ", Congratulations " + winner);
+    }	
   }
 }
