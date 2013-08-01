@@ -135,7 +135,7 @@ public class Board{
 	  for(int xAxis = 0; xAxis < gameBoard[yAxis].length;xAxis++){
 	    gameBoard[xAxis][yAxis] = new BoardPosition(xAxis,yAxis);
 		BoardPosition nextPosition = gameBoard[xAxis][yAxis];
-		nextPosition.addActionListener((HumanPlayer)player1);
+		//nextPosition.addActionListener((HumanPlayer)player1);
 		//JButton button = new JButton();		  
 		if(counter % 2 == 0){
 		  nextPosition.setBackground(Color.black);
