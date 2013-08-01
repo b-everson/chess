@@ -16,6 +16,10 @@ public class Move{
     return startingPiece;
   }
   
+  public ChessPiece getEndPiece(){
+    return endingPiece;
+  }
+  
   public Move(ChessPiece piece, BoardPosition end){
     this(piece.getPosition(), end);
   }
@@ -55,5 +59,14 @@ public class Move{
 	String startingCoords = "(" + (startingPosition.getXCoord() + 1) + ", " + (startingPosition.getYCoord() + 1) + ")";
 	String endingCoords = "(" + (endingPosition.getXCoord() + 1) + ", " + (endingPosition.getYCoord() + 1) + ")";
 	return player + " moves " + pieceName + " from " + startingCoords + " to " + endingCoords;
+  }
+  
+  //A move is the same if a piece moves from one position to another, resulting 
+  //in the same piece being removed
+  public boolean equals(Move other){
+    return this.endingPosition == other.getEndPosition() &&
+	    this.startingPosition == other.getStartPosition() &&
+		this.endingPiece == other.getEndPiece() &&
+		this.startingPiece == other.getStartPiece();
   }
 }
