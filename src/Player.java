@@ -24,6 +24,11 @@ public abstract class Player{
   protected ArrayList<ChessPiece> vitalEnemies;
   private String playerName;
   private int moveInCheck = 0;
+  private ArrayList<Rook> rooks;
+  
+  public ArrayList<Rook> getRooks(){
+    return rooks;
+  }
   
   public Board getBoard(){
     return this.board;
@@ -93,7 +98,11 @@ public abstract class Player{
 	pieces.add(13,p6);
 	pieces.add(14,p7);
 	pieces.add(15,p8);
-    
+	
+	rooks = new ArrayList<Rook>();
+	rooks.add(r1);
+	rooks.add(r2);
+  
 	vitalEnemies = new ArrayList<ChessPiece>();
 	player1 = false;
   }
@@ -148,6 +157,14 @@ public abstract class Player{
 	return check;
   }
   
+  public void update(){
+    for (ChessPiece piece : pieces){
+	  if(piece.getPosition() != null){
+	    piece.setVulnerablePositions();
+	  }
+	}
+  }
+  
   //stalemate is when there are no valid moves and the King is not in check
   boolean evaluateStaleMate(){
     if(evaluateCheck() || activePieces().size() == 1){
@@ -166,7 +183,7 @@ public abstract class Player{
   public ArrayList<Move> validMoves(){
     ArrayList<Move> myMoves = new ArrayList<Move>();
 	for (ChessPiece piece : pieces ){
-	  for(Move pieceMove : piece.checkValidMoves()){
+	  for(Move pieceMove  : piece.checkValidMoves()){
 	    myMoves.add(pieceMove);
 	  }
 	}
@@ -226,5 +243,5 @@ public abstract class Player{
 	
 	return (int)score;
   }
-  
+    
 }
