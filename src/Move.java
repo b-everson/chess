@@ -1,8 +1,8 @@
 public class Move{
-  private BoardPosition startingPosition;
-  private BoardPosition endingPosition;
-  private ChessPiece startingPiece;
-  private ChessPiece endingPiece;
+  protected BoardPosition startingPosition;
+  protected BoardPosition endingPosition;
+  protected ChessPiece startingPiece;
+  protected ChessPiece endingPiece;
   
   public BoardPosition getEndPosition(){
     return endingPosition;
@@ -37,6 +37,7 @@ public class Move{
     //clear startingPosition piece, set endingPosition piece to startingPosition piece
 	startingPosition.clearPiece();
 	startingPiece.setPosition(endingPosition);
+	startingPiece.setVulnerablePositions();
 	//
   }
   
@@ -44,10 +45,12 @@ public class Move{
     if(startingPiece != null){
 	  startingPosition.setPiece(startingPiece);
 	  startingPiece.setPosition(startingPosition);
+	  startingPiece.setVulnerablePositions();
 	}  
 	if(endingPiece != null){
 	  endingPosition.setPiece(endingPiece);
 	  endingPiece.setPosition(endingPosition);
+	  startingPiece.setVulnerablePositions();
 	}  
   }
   
