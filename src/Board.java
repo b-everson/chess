@@ -42,15 +42,8 @@ public class Board{
   }
   
   public void update(){
-    update(player1);
-	update(player2);
-  }
-  
-  public void update(Player player){
-    for (ChessPiece piece : player.getPieces()){
-	  if(piece.getPosition() != null)
-	    piece.setVulnerablePositions();
-	}
+    player1.update();
+	player2.update(); 
   }
   
   //using array of characters
@@ -135,7 +128,7 @@ public class Board{
 	  for(int xAxis = 0; xAxis < gameBoard[yAxis].length;xAxis++){
 	    gameBoard[xAxis][yAxis] = new BoardPosition(xAxis,yAxis);
 		BoardPosition nextPosition = gameBoard[xAxis][yAxis];
-		//nextPosition.addActionListener((HumanPlayer)player1);
+		nextPosition.addActionListener((HumanPlayer)player1);
 		//JButton button = new JButton();		  
 		if(counter % 2 == 0){
 		  nextPosition.setBackground(Color.black);
@@ -158,7 +151,13 @@ public class Board{
       return player2;	
   }
   
-
+  public Player getPlayer1(){
+    return player1;
+  }
+  
+  public Player getPlayer2(){
+    return player2;
+  }
   
   /* loop through each player's pieces
   get the position of piece and representative character- set

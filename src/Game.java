@@ -18,8 +18,8 @@ public class Game{
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	message = new JLabel("Welcome");
 	Board chessBoard = new Board();
-	AIPlayer testPlayer1 = new AIPlayer(chessBoard);
-	//HumanPlayer testPlayer1 = new HumanPlayer(chessBoard);
+	//AIPlayer testPlayer1 = new AIPlayer(chessBoard);
+	HumanPlayer testPlayer1 = new HumanPlayer(chessBoard);
 	AIPlayer testPlayer2 = new AIPlayer(chessBoard);
 	//HumanPlayer testPlayer2 = new HumanPlayer(chessBoard);
 	chessBoard.initialize((Player)testPlayer1,(Player)testPlayer2);
@@ -41,6 +41,7 @@ public class Game{
 	frame.setLocationRelativeTo(null);
 	do{
 	  nextPlayer.takeTurn();
+	  chessBoard.update();
 	  chessBoard.drawBoard();
 	  if (nextPlayer == testPlayer1){
 	    nextPlayer = testPlayer2;

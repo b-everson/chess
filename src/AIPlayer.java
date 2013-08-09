@@ -78,7 +78,8 @@ public class AIPlayer extends Player{
   }
   
   public MoveEvaluation alphabeta(int depth,Player player,Player opponent, int low, int high){
-    ArrayList<Move> validMoves = player.validMoves();
+    ArrayList<Move> validMoves = new ArrayList<Move>();
+	validMoves.addAll(player.validMoves());
 	MoveEvaluation best = new MoveEvaluation(null,-1000);  //best starts out at minimum
 	if(depth == 0 || validMoves.size() == 0){
 	  return new MoveEvaluation(null, player);  //player evaluates board (opponent for odd ply, player for even)
@@ -103,9 +104,9 @@ public class AIPlayer extends Player{
   private Move selectMove(){
     Move move; 
 	int roll = Game.random.nextInt(101);
-	if (roll <= 30){
+/*	if (roll <= 30){
 	  move = bestMove();
-	}else if (roll <= 90){
+	}else*/ if (roll <= 90){
 	  move = goodMove(true);
 	}else{
 	  move = goodMove(false);
@@ -153,7 +154,7 @@ public class AIPlayer extends Player{
 	getBoard().enabled(false);
 	Move move;
     
-	/* want to select move, then test it to see if it is a repeat. 
+	 /*want to select move, then test it to see if it is a repeat. 
 	After move is proven to be not a repeat it can be performed and added 
 	to the list of last couple moves*/
 	do{
