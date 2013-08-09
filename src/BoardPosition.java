@@ -1,15 +1,43 @@
 import javax.swing.JButton;
+import java.util.ArrayList;
 public class BoardPosition extends JButton {
   private int xCoord;
   private int yCoord;
   private ChessPiece currentPiece = null;
   private String contents = "       ";
+  private ArrayList<ChessPiece> attackingPieces;
   
-  public BoardPosition(int x, int y){
-    xCoord = x;
-	yCoord = y;
+  public boolean underAttack(Player player){
+    if (player.getDescription().equals("Player 1")){
+	  for(ChessPiece piece : attackingPieces){
+	    if(piece.getOwner().getDescription().equals("Player 2")){
+		  return true;
+		}
+	  }
+	}else{
+	  for(ChessPiece piece : attackingPieces){
+	    if(piece.getOwner().getDescription().equals("Player 1")){
+		  return true;
+		}
+	  }	
+	}
+	return false;
   }
   
+  public void addAttackingPiece(ChessPiece piece){
+    attackingPieces.add(piece);
+  }
+  
+  public void removeAttackingPiece(ChessPiece piece){
+    attackingPieces.remove(piece);
+  }
+  
+  public BoardPosition(int x, int y){
+    attackingPieces = new ArrayList<ChessPiece>();
+	xCoord = x;
+	yCoord = y;
+  }
+    
   public int getXCoord(){
     return xCoord;
   }
@@ -76,5 +104,5 @@ public class BoardPosition extends JButton {
 	  this.setIcon(currentPiece.getIcon());
 	}
   }
-  
+    
 }

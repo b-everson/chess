@@ -19,6 +19,10 @@ public abstract class ChessPiece{
     return type;
   }
   
+  public Board getBoard(){
+    return gameBoard;
+  }
+  
   public ChessPiece(char symbol, Player pOwner, Board bOwner, int pieceValue, String type){
     pieceIcon = new ImageIcon(".\\chesspieces\\" + pOwner.getType() + type + ".png");
 	this.type = type;
@@ -51,10 +55,26 @@ public abstract class ChessPiece{
 	return moves;
   }
   
+  private void setAttack(BoardPosition position){
+    position.addAttackingPiece(this);
+  }
+  
+  private void removeAttack(BoardPosition position){
+    position.removeAttackingPiece(this);
+  }
+  
+  private void clearVulnerablePositions(){
+    for (int i = vulnerablePositions.size() - 1; i >= 0; i--){
+	  removeAttack(vulnerablePositions.get(i));
+	  vulnerablePositions.remove(i);
+	}
+  }
+  
   public void setVulnerablePositions(){
-    vulnerablePositions.clear();
+    clearVulnerablePositions();
 	for (Move iMove : checkMoveAvailable()){
 	  vulnerablePositions.add(iMove.getEndPosition());
+	  setAttack(iMove.getEndPosition());
 	}
   }
   
@@ -67,6 +87,7 @@ public abstract class ChessPiece{
   public boolean move(BoardPosition position){
 	boolean canMove = true;
 	String message = "";
+	Move chosenMove = null;
 	
 	if(this.position != null){                        //move invalid if position already has player's piece in it
 	  if (position.occupiedByFriendly(this)) {
@@ -87,9 +108,11 @@ public abstract class ChessPiece{
 	  }	  
 	  
 	  	  boolean moveFound = false;
+
 	  for(Move iMove : checkMoveAvailable()){
         if(iMove.getEndPosition() == position){
 		  moveFound = true;
+		  chosenMove = iMove;
 		}
       }	  
 	  
@@ -101,7 +124,7 @@ public abstract class ChessPiece{
 	}
 
 	if(canMove){
-	  Move myMove = new Move(this, position);
+	  Move myMove = chosenMove;
 	  Game.setMessage(myMove.toString());
 	  myMove.perform();	 
       //Game.setMessage(myMove.toString());	  
@@ -137,7 +160,7 @@ public abstract class ChessPiece{
   
   public void setInactive(){
     this.position = null;
-	vulnerablePositions.clear();
+	clearVulnerablePositions();
   }
   
   public void setPosition(BoardPosition position){
@@ -162,28 +185,7 @@ public abstract class ChessPiece{
 	}
 	return vitalPieces;
   }
-  
-  
-  /*
-  protected boolean testMove(BoardPosition position){
-    ChessPiece testChessPiece = position.getPiece();   //save chesspiece in position intending to move to
-	BoardPosition originalPosition = this.getPosition();  //save original position to undo  test
-	position.setPiece(this); //set piece of position to this piece
-	this.setPosition(position); //set position of this piece to position
-	gameBoard.update();
-	
-	//if move results in player going into check then move is invalid
-	boolean goodMove = !owner.evaluateCheck();
-	if(testChessPiece != null){                     
-	  position.setPiece(testChessPiece);   //return testchesspiece to position
-	  testChessPiece.setPosition(position); 
-	}  
-	originalPosition.setPiece(this);   //return this piece to orinal position
-	this.setPosition(originalPosition);
-	gameBoard.update();
-	owner.evaluateCheck(); 
-	return goodMove;
-  }*/
+
   
   protected boolean testMove(Move tMove){
     tMove.perform();
