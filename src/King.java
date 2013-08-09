@@ -3,9 +3,54 @@ public class King extends ChessPiece{
   private static final char KING_CHAR = 'K';
   private static final int KING_VALUE = 100;
   private static final String KING_NAME = "king";
+  private boolean firstMove = true;
   
   public King(Player pOwner, Board bOwner){
     super(KING_CHAR, pOwner, bOwner, KING_VALUE, KING_NAME);
+  }
+  
+  private ArrayList<Move> castleMoves(){
+    ArrayList<Move> moves = new ArrayList<Move>(0);
+	if(firstMove ){  //if it is king's first move and not currently in check
+	  ArrayList<Rook> rooks = getOwner().getRooks();
+	  for (int j = 0; j <= rooks.size() - 1; j++){
+	    if(rooks.get(j).isFirstMove() && rooks.get(j).isActive()){ // if it is rooks first move
+	      boolean spaceClear = true;
+		  //if rook position.X coord > king position. x coord
+		  if(rooks.get(j).getPosition().getXCoord() > this.getPosition().getXCoord() ){
+		    for (int i = rooks.get(j).getPosition().getXCoord() - 1; i > this.getPosition().getXCoord(); i--){
+			  BoardPosition nextPosition = getBoard().getBoardPosition(i,getPosition().getYCoord());
+			  if(nextPosition.isOccupied()){
+			    spaceClear = false;
+			  }
+			}  
+			if(spaceClear){
+			  //add SpecialMove( this, position moving to, rook, rooks destination)
+              BoardPosition kingDestination = getBoard().getBoardPosition(getPosition().getXCoord() + 2, getPosition().getYCoord());
+			  BoardPosition rookDestination = getBoard().getBoardPosition(getPosition().getXCoord() + 1, getPosition().getYCoord());
+			  moves.add(new SpecialMove(this, kingDestination, rooks.get(j), rookDestination));
+            }			  
+			
+		  }else{
+		    for (int i = this.getPosition().getXCoord() - 1; i > rooks.get(j).getPosition().getXCoord(); i--){
+			  BoardPosition nextPosition = getBoard().getBoardPosition(i,getPosition().getYCoord());
+			  if(nextPosition.isOccupied()){
+			    spaceClear = false;
+			  }
+			}  
+			if(spaceClear){
+			//add SpecialMove( this, position moving to, rook, rooks destination)
+			//TODO: get proper coordinates for movement.
+			  BoardPosition kingDestination = getBoard().getBoardPosition(getPosition().getXCoord() - 2, getPosition().getYCoord());
+			  BoardPosition rookDestination = getBoard().getBoardPosition(getPosition().getXCoord() - 1, getPosition().getYCoord());
+			  moves.add(new SpecialMove(this, kingDestination, rooks.get(j), rookDestination));
+		    }
+			
+		  }
+	    }
+	  }
+	}
+	return moves;
   }
   
   public ArrayList<Move> checkMoveAvailable(){
@@ -28,6 +73,9 @@ public class King extends ChessPiece{
 		}
 	  }
 	}
+	
+	possibilities.addAll(castleMoves());
+	
 	return possibilities;
   }
   
@@ -36,6 +84,12 @@ public class King extends ChessPiece{
 	  Game.setMessage("Cannot move your king into check.");
 	  return false;
 	}  
-	return super.move(position);
+	
+	boolean acceptedMove = super.move(position);
+	if(acceptedMove){
+	  firstMove = false;
+	}
+	
+	return acceptedMove;
   }
 }

@@ -3,6 +3,7 @@ public class Rook extends ChessPiece{
   private static final char ROOK_CHAR = 'r';
   private static final int ROOK_VALUE = 5;
   private static final String ROOK_NAME = "rook";
+  private boolean firstMove = true;
   
   public Rook(Player pOwner, Board bOwner){
     super(ROOK_CHAR,pOwner, bOwner, ROOK_VALUE, ROOK_NAME);
@@ -68,6 +69,18 @@ public class Rook extends ChessPiece{
 	
 
 	return possibilities;
+  }
+  
+  public boolean move(BoardPosition position){
+    boolean acceptedMove = super.move(position);
+	if(acceptedMove){
+	  firstMove = false;
+	}
+	return acceptedMove;
+  }
+  
+  public boolean isFirstMove(){
+    return firstMove;
   }
   
 }
