@@ -2,10 +2,20 @@ import java.util.ArrayList;
 public class Pawn extends ChessPiece{
   private static final char PAWN_CHAR = 'p';
   private int direction = -1;
-  boolean firstMove = true;
   private static final int PAWN_VALUE = 1;
   private static final String PAWN_NAME = "pawn";
+  private BoardPosition initialPosition;
+  private boolean firstMove = true;
   
+    //function called only when adding a piece to the board
+  public void initialize(BoardPosition position){
+    this.initialPosition = position;
+	super.initialize(position);
+  }
+  
+  public boolean firstMove(){
+    return initialPosition.equals(position) && firstMove;
+  }
   public int getDirection(){
     return direction;
   }
@@ -40,7 +50,7 @@ public class Pawn extends ChessPiece{
 	}  
 	BoardPosition pos2 = gameBoard.getBoardPosition(position.getXCoord(), position.getYCoord() + 2 * direction); //check 2 positions forward of pawn based on position if pawn's first move
 	if(pos2 != null){  
-	  if(firstMove && !pos2.isOccupied() && !pos1.isOccupied()){  // only add this position if space 2 positions forward is empty and it is pawn's first move
+	  if(firstMove() && !pos2.isOccupied() && !pos1.isOccupied()){  // only add this position if space 2 positions forward is empty and it is pawn's first move
 		possibilities.add(new Move(this, pos2));
 	  }
 	}
@@ -55,16 +65,6 @@ public class Pawn extends ChessPiece{
 	    possibilities.add(new Move(this,pos4));
     }	
 	return possibilities;
-  }
-  
-  //pawn's vulnerable positions are unique in that they differ from regular available moves
-  public boolean move(BoardPosition position){
-    boolean moveTrue = super.move(position);  
-	if(moveTrue){
-	  firstMove = false;
-	  setVulnerablePositions();  
-	}
-	return moveTrue;
   }
   
   public boolean isDoubled(){
@@ -126,6 +126,15 @@ public class Pawn extends ChessPiece{
 	  }
 	}
 	return isolated;
+  }
+  
+  public boolean move(BoardPosition position){
+	boolean acceptedMove = super.move(position);
+	if (acceptedMove){
+	  firstMove = false;
+	}
+	
+	return acceptedMove;
   }
   
 }
