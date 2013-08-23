@@ -180,6 +180,11 @@ public abstract class Player{
 	initPiece.initialize(position);
   }
   
+  public void setQueenFirst(){
+    pieces.remove(q);
+	pieces.add(0,q);
+  }
+  
   public ArrayList<Move> validMoves(){
     ArrayList<Move> myMoves = new ArrayList<Move>();
 	for (ChessPiece piece : pieces ){
