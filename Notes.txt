@@ -227,3 +227,10 @@ Castling is permissible if and only if all of the following conditions hold (Sch
     5.The king does not pass through a square that is under attack by an enemy piece.[2]
     6.The king does not end up in check (true of any legal move).
     7.The king and the chosen rook are on the first rank of the player (rank 1 for White, rank 8 for Black
+
+8/23/13
+
+
+First move boolean in pawn, king, and rook classes don't work during testing moves, so getting rid of variable and
+now will test to see if these pieces are in their initial position. This means I must save their initial position
+while initializing board.
