@@ -112,6 +112,9 @@ public class Board{
 	player1.initializePiece(13,getBoardPosition(5,1));
 	player1.initializePiece(14,getBoardPosition(6,1));
 	player1.initializePiece(15,getBoardPosition(7,1));
+	
+	player1.setQueenFirst(); //Move queen to first position of ArrayList to increase benefit of alpha beta pruning
+	player2.setQueenFirst();
   }
   
   public BoardPosition getBoardPosition(int x, int y){
@@ -159,11 +162,4 @@ public class Board{
     return player2;
   }
   
-  /* loop through each player's pieces
-  get the position of piece and representative character- set
-  private void addPieces(){
-    for(int xAxis = 0; xAxis <= Board.BOARD_LENGTH;xAxis++){
-	  
-	}
-  }*/
 }
